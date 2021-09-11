@@ -1,5 +1,6 @@
 .cards__container {
     display: flex;
     align-items: baseline;
-    justify-content: space-around;
+    margin-left: 21px;
+    margin-right: 21px;
 }
