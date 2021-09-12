@@ -5,3 +5,10 @@
     position: relative;
     align-items: baseline;
 }
+
+@media all and (max-width: 962px) {
+    .profile__info {
+        justify-content: center;
+        margin-bottom: 36px;
+    }
+}

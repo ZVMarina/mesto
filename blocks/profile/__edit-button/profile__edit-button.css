@@ -8,3 +8,9 @@
     height: 24px;
     margin-left: 18px;
 }
+
+@media all and (max-width: 962px) {
+    .profile__edit-button {
+        margin-left: 16px;
+    }
+}
