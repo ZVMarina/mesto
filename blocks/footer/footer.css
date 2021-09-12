@@ -2,3 +2,11 @@
     font-family: Inter, Arial, Helvetica, sans-serif;
     padding-bottom: 60px;
 }
+
+@media all and (max-width: 654px) {
+    .footer {
+        padding-bottom: 36px;
+        padding-left: 19px;
+        max-width: 320px;
+    }
+}
