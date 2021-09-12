@@ -9,3 +9,10 @@
     -webkit-font-smoothing: antialiased;
     min-width: 320px;
 }
+
+@media all and (max-width: 962px) {
+    .page {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}

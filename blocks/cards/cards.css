@@ -8,3 +8,16 @@
     row-gap: 20px;
     flex-wrap: wrap;
 }
+
+@media all and (max-width: 962px) {
+    .cards {
+        column-gap: 25px;
+        row-gap: 28px;
+    }
+}
+
+/* @media all and (max-width: 727px) {
+    .cards {
+        row-gap: 20px;
+    }
+} */
