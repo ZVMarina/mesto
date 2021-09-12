@@ -33,6 +33,7 @@
 
 /* modal */
 @import url(../blocks/modal/modal.css);
+@import url(../blocks/modal/_open/modal_open.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__input/form__input.css);
