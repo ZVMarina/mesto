@@ -16,8 +16,8 @@
     }
 }
 
-/* @media all and (max-width: 727px) {
+@media all and (max-width: 671px) {
     .cards {
         row-gap: 20px;
     }
-} */
+}
