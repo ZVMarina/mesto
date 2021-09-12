@@ -2,3 +2,15 @@
     max-width: 880px;
     margin: auto;
 }
+
+@media all and (max-width: 962px) {
+    .section {
+        max-width: 592px;
+    }
+}
+
+@media all and (max-width: 654px) {
+    .section {
+        max-width: 282px;
+    }
+}

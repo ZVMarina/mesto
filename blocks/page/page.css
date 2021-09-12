@@ -16,3 +16,9 @@
         padding-right: 25px;
     }
 }
+
+@media all and (max-width: 320px) {
+    .page {
+        padding: 0;
+    }
+}
