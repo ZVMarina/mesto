@@ -1,0 +1,13 @@
+.form__main-button {
+    padding: 16px 124px;
+    background: #000;
+    border-radius: 2px;
+    color: #fff;
+    transition: opacity .3s ease;
+    border: none;
+}
+
+.form__main-button:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

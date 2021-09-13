@@ -13,3 +13,10 @@
     left: 0;
     opacity: .7;
 }
+
+@media all and (max-width: 654px) {
+    .header {
+        padding: 28px 0 32px;
+        max-width: 320px;
+    }
+}

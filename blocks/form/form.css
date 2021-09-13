@@ -1,0 +1,15 @@
+.form {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    padding: 34px 36px;
+    background-color: #fff;
+    color: #000;
+    max-width: 430px;
+    width: 100%;
+    min-height: 330px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}

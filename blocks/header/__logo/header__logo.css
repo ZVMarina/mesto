@@ -1,3 +1,9 @@
 .header__logo {
     position: relative;
 }
+
+@media all and (max-width: 320px) {
+    .header__logo {
+        padding-left: 27px;
+    }
+}
