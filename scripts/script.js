@@ -12,19 +12,24 @@ const job = document.querySelector(".profile__subtitle");
 
 function openModal() {
     modal.classList.add("modal_open");
+
     nameInput.value = nickname.textContent;
     jobInput.value = job.textContent;
 }
 
 function closeModal(event) {
     event.preventDefault();
+
     modal.classList.remove("modal_open");
 }
 
 function saveInfo(event) {
     event.preventDefault();
+
     nickname.textContent = nameInput.value;
     job.textContent = jobInput.value;
+
+    closeModal(event);
 }
 
 editButton.addEventListener("click", openModal);
