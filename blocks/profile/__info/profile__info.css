@@ -1,14 +1,23 @@
 .profile__info {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 336px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(min-content, max-content));
+    grid-template-rows: repeat(2, minmax(min-content, max-content));
+    column-gap: 18px;
+    row-gap: 16px;
     position: relative;
     align-items: baseline;
 }
 
 @media all and (max-width: 962px) {
     .profile__info {
-        justify-content: center;
+        justify-items: center;
         margin-bottom: 36px;
+        column-gap: 16px;
+    }
+}
+
+@media all and (max-width: 654px) {
+    .profile__info {
+        row-gap: 14px;
     }
 }

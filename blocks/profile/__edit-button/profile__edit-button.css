@@ -6,7 +6,6 @@
     border: solid 1px #fff;
     width: 24px;
     height: 24px;
-    margin-left: 18px;
     transition: opacity .3s ease;
     padding: 0;
 }
@@ -14,10 +13,4 @@
 .profile__edit-button:hover {
     opacity: 0.6;
     cursor: pointer;
-}
-
-@media all and (max-width: 962px) {
-    .profile__edit-button {
-        margin-left: 16px;
-    }
 }
