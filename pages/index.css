@@ -26,7 +26,6 @@
 @import url(../blocks/cards/__title/cards__title.css);
 @import url(../blocks/cards/__like-button/cards__like-button.css);
 @import url(../blocks/cards/__like-svg/cards__like-svg.css);
-@import url(../blocks/cards/__like-path/cards__like-path.css);
 
 /* footer */
 @import url(../blocks/footer/footer.css);
