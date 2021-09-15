@@ -13,3 +13,16 @@
     justify-content: space-between;
     position: relative;
 }
+
+@media all and (max-width: 654px) {
+    .form {
+        margin-right: 19px;
+        margin-left: 19px;
+    }
+}
+
+@media all and (max-width: 425px) {
+    .form {
+        padding: 25px 22px;
+    }
+}

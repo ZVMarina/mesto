@@ -4,3 +4,9 @@
     line-height: 1.2;
     margin: 0;
 }
+
+@media all and (max-width: 425px) {
+    .form__title {
+        font-size: 18px;
+    }
+}

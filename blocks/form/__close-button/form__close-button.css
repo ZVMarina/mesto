@@ -16,3 +16,10 @@
     opacity: 0.6;
     cursor: pointer;
 }
+
+@media all and (max-width: 654px) {
+    .form__close-button {
+        top: -48px;
+        right: 0;
+    }
+}
