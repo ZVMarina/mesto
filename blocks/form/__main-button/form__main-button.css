@@ -1,13 +1,23 @@
 .form__main-button {
-    padding: 16px 124px;
+    padding: 16px 0;
+    width: 100%;
     background: #000;
     border-radius: 2px;
     color: #fff;
-    transition: opacity .3s ease;
+    transition: opacity 0.3s ease;
     border: none;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 1.2;
 }
 
 .form__main-button:hover {
     opacity: 0.8;
     cursor: pointer;
+}
+
+@media all and (max-width: 425px) {
+    .form__main-button {
+        font-size: 14px;;
+    }
 }
