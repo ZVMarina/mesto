@@ -11,16 +11,3 @@
     min-height: 100vh;
     position: relative;
 }
-
-@media all and (max-width: 962px) {
-    .page {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
-}
-
-@media all and (max-width: 320px) {
-    .page {
-        padding: 0;
-    }
-}
