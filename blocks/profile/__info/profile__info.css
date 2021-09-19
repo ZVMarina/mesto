@@ -19,5 +19,6 @@
 @media all and (max-width: 654px) {
     .profile__info {
         row-gap: 14px;
+        column-gap: 10px;
     }
 }

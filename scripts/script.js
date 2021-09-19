@@ -1,15 +1,20 @@
+/* Модальное окно и форма */
 const modal = document.querySelector(".modal");
+const form = document.querySelector(".form");
 
+/* Кнопки */
 const editButton = document.querySelector(".profile__edit-button");
 const closeButton = document.querySelector(".form__close-button");
-const saveButton = document.querySelector(".form__main-button");
 
+/* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
 const jobInput = document.querySelector(".form__input_value_job");
 
+/* Значения инпутов */
 const nickname = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
 
+/* Открыть модальное окно */
 function openModal() {
     modal.classList.add("modal_open");
 
@@ -17,12 +22,12 @@ function openModal() {
     jobInput.value = job.textContent;
 }
 
+/* Закрыть модальное окно */
 function closeModal(event) {
-    event.preventDefault();
-
     modal.classList.remove("modal_open");
 }
 
+/* Сохранить информацию */
 function saveInfo(event) {
     event.preventDefault();
 
@@ -32,6 +37,7 @@ function saveInfo(event) {
     closeModal(event);
 }
 
+/* Слушатели событий */
 editButton.addEventListener("click", openModal);
 closeButton.addEventListener("click", closeModal);
-saveButton.addEventListener("click", saveInfo);
+form.addEventListener("submit", saveInfo);

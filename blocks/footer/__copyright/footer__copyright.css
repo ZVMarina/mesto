@@ -8,7 +8,6 @@
 
 @media all and (max-width: 654px) {
     .footer__copyright {
-        padding-bottom: 36px;
-        max-width: 320px;
+        font-size: 14px;
     }
 }
