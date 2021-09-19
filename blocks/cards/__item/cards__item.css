@@ -3,13 +3,4 @@
     max-width: 282px;
     border-radius: 10px;
     overflow: hidden;
-    max-height: 361px;
-}
-
-.cards__item::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
-    padding-top: 128%;
 }
