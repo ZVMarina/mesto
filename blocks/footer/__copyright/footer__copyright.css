@@ -6,7 +6,7 @@
     margin: 0;
 }
 
-@media all and (max-width: 654px) {
+@media all and (max-width: 425px) {
     .footer__copyright {
         font-size: 14px;
     }
