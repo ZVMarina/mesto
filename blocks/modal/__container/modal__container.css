@@ -1,4 +1,4 @@
-/* .form {
+.modal__container {
     font-family: Inter, Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     padding: 34px 36px;
@@ -12,17 +12,17 @@
     justify-content: space-between;
     position: relative;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-} */
+}
 
-/* @media all and (max-width: 654px) {
-    .form {
+@media all and (max-width: 654px) {
+    .modal__container {
         margin-right: 19px;
         margin-left: 19px;
     }
 }
 
 @media all and (max-width: 425px) {
-    .form {
+    .modal__container {
         padding: 25px 22px;
     }
-} */
+}
