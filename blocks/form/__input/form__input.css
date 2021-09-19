@@ -20,3 +20,9 @@
     outline: none;
     border-bottom: 1px solid #000;
 }
+
+@media all and (max-width: 425px) {
+    .form__input:last-of-type {
+        margin-bottom: 45px;
+    }
+}
