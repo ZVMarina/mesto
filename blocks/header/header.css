@@ -9,3 +9,9 @@
         max-width: none;
     }
 }
+
+@media all and (max-width: 654px) {
+    .header {
+        padding: 28px 0 32px;
+    }
+}
