@@ -28,8 +28,8 @@ const initialCards = [
 ];
 
 /* Модальное окно и форма */
-const modalEdit = document.querySelector(".modal_edit-info");
-const modalAdd = document.querySelector(".modal_add-place");
+const modalEditInfo = document.querySelector(".modal_type_edit-info");
+const modalAddPlace = document.querySelector(".modal_type_add-place");
 const forms = document.querySelectorAll(".form");
 
 /* Кнопки */
@@ -48,25 +48,25 @@ const job = document.querySelector(".profile__subtitle");
 /* Открыть модальное окно */
 function openModal(event) {
     if (event.target.closest('.profile__edit-button')) {
-        modalEdit.classList.add("modal_open");
+        modalEditInfo.classList.add("modal_open");
 
         nameInput.value = nickname.textContent;
         jobInput.value = job.textContent;
     }
 
     if (event.target.closest('.profile__add-button')) {
-        modalAdd.classList.add("modal_open");
+        modalAddPlace.classList.add("modal_open");
     }
 }
 
 /* Закрыть модальное окно */
 function closeModal(event) {
-    if (event.target.closest('.modal_edit-info')) {
-        modalEdit.classList.remove("modal_open");
+    if (event.target.closest('.modal_type_edit-info')) {
+        modalEditInfo.classList.remove("modal_open");
     }
 
-    if (event.target.closest('.modal_add-place')) {
-        modalAdd.classList.remove("modal_open");
+    if (event.target.closest('.modal_type_add-place')) {
+        modalAddPlace.classList.remove("modal_open");
 
         placeInput.value = '';
         linkInput.value = '';
@@ -75,14 +75,14 @@ function closeModal(event) {
 
 /* Сохранить информацию */
 function saveInfo(event) {
-    if (event.target.closest('.modal_edit-info')) {
+    if (event.target.closest('.modal_type_edit-info')) {
         event.preventDefault();
 
         nickname.textContent = nameInput.value;
         job.textContent = jobInput.value;
     }
 
-    if (event.target.closest('.modal_add-place')) {
+    if (event.target.closest('.modal_type_add-place')) {
         event.preventDefault();
 
         /* const cardTemplate = document.querySelector('.cards-template').content;
