@@ -29,48 +29,7 @@
 
             <section class="elements section" aria-label="Фото-карточки мест, где я был">
                 <ul class="elements__cards">
-                    <li class="card">
-                        <img src="./images/elements/1.jpg" alt="Карачаево-Черкессия" class="card__image">
-                        <div class="card__container">
-                            <h2 class="card__title">Карачаево-Черкессия</h2>
-                            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img src="./images/elements/2.jpg" alt="Гора Эльбрус" class="card__image">
-                        <div class="card__container">
-                            <h2 class="card__title">Гора Эльбрус</h2>
-                            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img src="./images/elements/3.jpg" alt="Домбай" class="card__image">
-                        <div class="card__container">
-                            <h2 class="card__title">Домбай</h2>
-                            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img src="./images/elements/4.jpg" alt="Мыс Нюкля" class="card__image">
-                        <div class="card__container">
-                            <h2 class="card__title">Мыс Нюкля</h2>
-                            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img src="./images/elements/5.jpg" alt="Камчатка" class="card__image">
-                        <div class="card__container">
-                            <h2 class="card__title">Камчатка</h2>
-                            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-                        </div>
-                    </li>
-                    <li class="card">
-                        <img src="./images/elements/6.jpg" alt="Байкал" class="card__image">
-                        <div class="card__container">
-                            <h2 class="card__title">Байкал</h2>
-                            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
-                        </div>
-                    </li>
+
                 </ul>
             </section>
 
@@ -96,7 +55,8 @@
                 <h2 class="modal__form-title">Новое место</h2>
                 <form class="form" name="add-place">
                     <input type="text" class="form__input form__input_value_place" name="place" placeholder="Название">
-                    <input type="text" class="form__input form__input_value_link" name="link" placeholder="Ссылка на картинку">
+                    <input type="text" class="form__input form__input_value_link" name="link"
+                        placeholder="Ссылка на картинку">
                     <button class="form__main-button" type="submit">Создать</button>
                     <button class="form__close-button" type="button" aria-label="Закрыть"></button>
                 </form>
@@ -104,6 +64,15 @@
         </div>
     </div>
 
+    <template class="cards-template">
+        <li class="card">
+            <img class="card__image">
+            <div class="card__container">
+                <h2 class="card__title"></h2>
+                <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
+            </div>
+        </li>
+    </template>
     <script src="./scripts/script.js"></script>
 </body>
 
