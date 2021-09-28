@@ -136,12 +136,21 @@ function addCard() {
             toggleActiveLike(likeButton);
         });
 
+        const deleteButton = cardElement.querySelector(".card__button_type_delete");
+        deleteButton.addEventListener('click', (event) => {
+            removeCard(event.target);
+        });
+
         cardsElement.append(cardElement);
     })
 }
 
 function toggleActiveLike(likeButton) {
     likeButton.classList.toggle('card__button_active');
+}
+
+function removeCard(deleteButtonEl) {
+    deleteButtonEl.closest('.card').remove();
 }
 
 closeButtons.forEach(item => {
