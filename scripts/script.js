@@ -86,15 +86,7 @@ function saveInfo(event) {
     if (event.target.closest('.modal_type_add-place')) {
         event.preventDefault();
 
-        initialCards.splice(0, initialCards.length);
-
-        const card = {};
-        card.name = placeInput.value;
-        card.link = linkInput.value;
-
-        initialCards.push(card);
-
-        renderCard();
+        addCard()
 
         placeInput.value = '';
         linkInput.value = '';
@@ -103,7 +95,18 @@ function saveInfo(event) {
     closeModal(event);
 }
 
-/* Рендеринг карточек */
+/* Добавить карточку */
+function addCard() {
+    const card = {};
+    card.name = placeInput.value;
+    card.link = linkInput.value;
+
+    initialCards.push(card);
+    cardsElement.innerHTML = '';
+    renderCard()
+}
+
+/* Создание шаблона карточек */
 function createTemplateCard(item) {
     const cardTemplate = document.querySelector('.cards-template').content;
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
@@ -128,6 +131,7 @@ function createTemplateCard(item) {
     return cardElement;
 }
 
+/* Рендеринг карточек */
 function renderCard() {
     initialCards.forEach(item => {
         const cardTemplate = createTemplateCard(item);
@@ -136,10 +140,12 @@ function renderCard() {
     })
 }
 
+/* Поставить лайк */
 function toggleActiveLike(likeButton) {
     likeButton.classList.toggle('card__button_active');
 }
 
+/* Удалить карточку */
 function removeCard(deleteButtonEl) {
     deleteButtonEl.closest('.card').remove();
 }
