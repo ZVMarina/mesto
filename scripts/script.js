@@ -46,6 +46,7 @@ const nickname = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
 
 /* Открыть модальное окно */
+
 function openModal(event) {
     if (event.target.closest('.profile__edit-button')) {
         modalEditInfo.classList.add("modal_open");
@@ -130,8 +131,17 @@ function addCard() {
         const cardTitile = cardElement.querySelector('.card__title');
         cardTitile.textContent = `${item.name}`
 
+        const likeButton = cardElement.querySelector(".card__button_type_like");
+        likeButton.addEventListener('click', () => {
+            toggleActiveLike(likeButton);
+        });
+
         cardsElement.append(cardElement);
     })
+}
+
+function toggleActiveLike(likeButton) {
+    likeButton.classList.toggle('card__button_active');
 }
 
 closeButtons.forEach(item => {
