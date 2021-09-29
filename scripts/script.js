@@ -29,11 +29,13 @@ const initialCards = [
 
 /* Модальное окно и форма */
 const modalEditInfo = document.querySelector(".modal_type_edit-info");
-const modalAddPlace = document.querySelector(".modal_type_add-place");
-const forms = document.querySelectorAll(".form");
+const modalAddPlace = document.querySelector(".modal_type_add-card");
+const formProfile = document.querySelector(".form_place_profile");
 
 /* Кнопки */
 const closeButtons = document.querySelectorAll(".form__close-button");
+const addButton = document.querySelector(".form__main-button_place_popup-card");
+const saveButton = document.querySelector(".form__main-button_place_popup-profile");
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
@@ -66,7 +68,7 @@ function closeModal(event) {
         modalEditInfo.classList.remove("modal_open");
     }
 
-    if (event.target.closest('.modal_type_add-place')) {
+    if (event.target.closest('.modal_type_add-card')) {
         modalAddPlace.classList.remove("modal_open");
 
         placeInput.value = '';
@@ -74,36 +76,14 @@ function closeModal(event) {
     }
 }
 
-/* Сохранить информацию */
+/* Сохранить информацию профиля */
 function saveInfo(event) {
-    if (event.target.closest('.modal_type_edit-info')) {
-        event.preventDefault();
+    event.preventDefault();
 
-        nickname.textContent = nameInput.value;
-        job.textContent = jobInput.value;
-    }
-
-    if (event.target.closest('.modal_type_add-place')) {
-        event.preventDefault();
-
-        addCard()
-
-        placeInput.value = '';
-        linkInput.value = '';
-    }
+    nickname.textContent = nameInput.value;
+    job.textContent = jobInput.value;
 
     closeModal(event);
-}
-
-/* Добавить карточку */
-function addCard() {
-    const card = {};
-    card.name = placeInput.value;
-    card.link = linkInput.value;
-
-    initialCards.push(card);
-    cardsElement.innerHTML = '';
-    renderCard()
 }
 
 /* Создание шаблона карточек */
@@ -140,6 +120,24 @@ function renderCard() {
     })
 }
 
+/* Добавить карточку */
+function addCard(event) {
+    event.preventDefault();
+
+    const card = {};
+    card.name = placeInput.value;
+    card.link = linkInput.value;
+
+    initialCards.push(card);
+    cardsElement.innerHTML = '';
+    renderCard()
+
+    placeInput.value = '';
+    linkInput.value = '';
+
+    closeModal(event);
+}
+
 /* Поставить лайк */
 function toggleActiveLike(likeButton) {
     likeButton.classList.toggle('card__button_active');
@@ -154,9 +152,8 @@ closeButtons.forEach(item => {
     item.addEventListener("click", closeModal);
 });
 
-forms.forEach(item => {
-    item.addEventListener("submit", saveInfo);
-});
-
 document.addEventListener('click', openModal);
+formProfile.addEventListener("submit", saveInfo);
 window.addEventListener('load', renderCard);
+addButton.addEventListener('click', addCard);
+saveButton.addEventListener('click', saveInfo);
