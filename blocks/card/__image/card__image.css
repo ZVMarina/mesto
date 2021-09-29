@@ -3,4 +3,5 @@
     display: block;
     object-fit: cover;
     height: 282px;
+    cursor: pointer;
 }
