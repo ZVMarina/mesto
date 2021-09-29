@@ -128,9 +128,7 @@ function addCard(event) {
     card.name = placeInput.value;
     card.link = linkInput.value;
 
-    initialCards.push(card);
-    cardsElement.innerHTML = '';
-    renderCard()
+    cardsElement.prepend(createTemplateCard(card))
 
     placeInput.value = '';
     linkInput.value = '';
