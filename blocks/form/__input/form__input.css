@@ -6,6 +6,7 @@
     width: 100%;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
 }
 
 .form__input:last-of-type {
@@ -19,6 +20,38 @@
 .form__input:focus {
     outline: none;
     border-bottom: 1px solid #000;
+}
+
+.form__input::-webkit-input-placeholder {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #C4C4C4;
+}
+
+.form__input::-moz-placeholder {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #C4C4C4;
+}
+
+.form__input::-ms-input-placeholder {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #C4C4C4;
+}
+
+.form__input::placeholder {
+    font-family: inherit;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #C4C4C4;
 }
 
 @media all and (max-width: 425px) {
