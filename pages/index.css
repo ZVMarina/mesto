@@ -44,3 +44,4 @@
 @import url(../blocks/form/__main-button/form__main-button.css);
 @import url(../blocks/form/__close-button/form__close-button.css);
 @import url(../blocks/modal/__container/_image/modal__container_image.css);
+@import url(../blocks/modal/_type/modal_type_view-image.css);
