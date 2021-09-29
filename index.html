@@ -45,7 +45,8 @@
                     <input type="text" class="form__input form__input_value_name" name="user-name">
                     <input type="text" class="form__input form__input_value_job" name="user-job">
                     <button class="form__main-button form__main-button_place_profile" type="submit">Сохранить</button>
-                    <button class="form__close-button form__close-button_place_profile" type="button" aria-label="Закрыть"></button>
+                    <button class="form__close-button form__close-button_place_profile" type="button"
+                        aria-label="Закрыть"></button>
                 </form>
             </div>
         </div>
@@ -58,15 +59,18 @@
                     <input type="text" class="form__input form__input_value_link" name="link"
                         placeholder="Ссылка на картинку">
                     <button class="form__main-button form__main-button_place_new-card" type="submit">Создать</button>
-                    <button class="form__close-button form__close-button_place_new-card" type="button" aria-label="Закрыть"></button>
+                    <button class="form__close-button form__close-button_place_new-card" type="button"
+                        aria-label="Закрыть"></button>
                 </form>
             </div>
         </div>
 
-        <div class="modal modal_type_open-card">
-            <div class="modal__container">
-                <h2 class="modal__form-title">Новое место</h2>
-
+        <div class="modal modal_type_view-image">
+            <div class="modal__container modal__container_image">
+                <button class="form__close-button form__close-button_place_image" type="button"
+                    aria-label="Закрыть"></button>
+                <img src="./images/elements/1.jpg" alt="Фото карточки" class="modal__image">
+                <p class="modal__image-title"></p>
             </div>
         </div>
     </div>
