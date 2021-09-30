@@ -28,9 +28,9 @@ const initialCards = [
 ];
 
 /* Модальное окно и форма */
-const modalEditInfo = document.querySelector(".modal_type_edit-info");
-const modalAddPlace = document.querySelector(".modal_type_add-card");
-const modalViewCard = document.querySelector(".modal_type_view-image");
+const popupEditInfo = document.querySelector(".popup_type_edit-info");
+const popupAddPlace = document.querySelector(".popup_type_add-card");
+const popupViewCard = document.querySelector(".popup_type_view-image");
 const formProfile = document.querySelector(".form_type_profile");
 
 /* Кнопки */
@@ -52,13 +52,13 @@ const nickname = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
 
 /* Открыть модальное окно */
-function openModal(modal) {
-    modal.classList.add("modal_open");
+function openPopup(popup) {
+    popup.classList.add("popup_open");
 }
 
 /* Закрыть модальное окно */
-function closeModal(modal) {
-    modal.classList.remove("modal_open");
+function closePopup(popup) {
+    popup.classList.remove("popup_open");
 }
 
 /* Получить значения инпутов */
@@ -80,7 +80,7 @@ function saveInfo(event) {
     nickname.textContent = nameInput.value;
     job.textContent = jobInput.value;
 
-    closeModal(modalEditInfo);
+    closePopup(popupEditInfo);
 }
 
 /* Создание шаблона карточек */
@@ -106,14 +106,14 @@ function createTemplateCard(item) {
     });
 
     cardImage.addEventListener('click', () => {
-        const image = document.querySelector('.modal__image');
-        const titile = document.querySelector('.modal__image-title');
+        const image = document.querySelector('.popup__image');
+        const titile = document.querySelector('.popup__image-title');
 
         image.src = `${item.link}`;
         image.alt = `${item.name}`;
         titile.textContent = `${item.name}`
 
-        openModal(modalViewCard);
+        openPopup(popupViewCard);
     });
 
     return cardElement;
@@ -140,7 +140,7 @@ function addCard(event) {
 
     clearInputs();
 
-    closeModal(modalAddPlace);
+    closePopup(popupAddPlace);
 }
 
 /* Поставить лайк */
@@ -154,13 +154,13 @@ function removeCard(deleteButtonEl) {
 }
 
 /* Слушатели открытия формы */
-popupProfileOpenBtn.addEventListener('click', () => { openModal(modalEditInfo); getValueInputs() });
-popupAddCardOpenBtn.addEventListener('click', () => openModal(modalAddPlace));
+popupProfileOpenBtn.addEventListener('click', () => { openPopup(popupEditInfo); getValueInputs() });
+popupAddCardOpenBtn.addEventListener('click', () => openPopup(popupAddPlace));
 
 /* Слушатели закрытия формы */
-popupProfileCloseBtn.addEventListener('click', () => closeModal(modalEditInfo));
-popupAddCardCloseBtn.addEventListener('click', () => { closeModal(modalAddPlace); clearInputs() });
-popupViewCardCloseBtn.addEventListener('click', () => closeModal(modalViewCard));
+popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
+popupAddCardCloseBtn.addEventListener('click', () => { closePopup(popupAddPlace); clearInputs() });
+popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard));
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 window.addEventListener('load', renderCards); /* Отрисовать карточки */

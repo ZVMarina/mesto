@@ -1,9 +1,9 @@
-.modal_type_view-image {
+.popup_type_view-image {
     background-color: rgba(0, 0, 0, 0.9);
 }
 
 @media all and (max-width: 767px) {
-    .modal_type_view-image {
+    .popup_type_view-image {
         padding-left: 40px;
         padding-right: 40px;
     }

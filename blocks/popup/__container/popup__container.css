@@ -1,4 +1,4 @@
-.modal__container {
+.popup__container {
     font-family: Inter, Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     padding: 34px 36px;
@@ -15,14 +15,14 @@
 }
 
 @media all and (max-width: 654px) {
-    .modal__container {
+    .popup__container {
         margin-right: 19px;
         margin-left: 19px;
     }
 }
 
 @media all and (max-width: 425px) {
-    .modal__container {
+    .popup__container {
         padding: 25px 22px;
     }
 }
