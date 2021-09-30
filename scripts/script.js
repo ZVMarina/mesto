@@ -36,9 +36,9 @@ const formProfile = document.querySelector(".form_type_profile");
 /* Кнопки */
 const popupProfileOpenBtn = document.querySelector(".profile__edit-button");
 const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
-const popupProfileCloseBtn = document.querySelector(".form__close-button_place_profile");
-const popupAddCardCloseBtn = document.querySelector(".form__close-button_place_new-card");
-const popupViewCardCloseBtn = document.querySelector(".form__close-button_place_image");
+const popupProfileCloseBtn = document.querySelector(".popup__close-button_place_profile");
+const popupAddCardCloseBtn = document.querySelector(".popup__close-button_place_new-card");
+const popupViewCardCloseBtn = document.querySelector(".popup__close-button_place_image");
 const addButton = document.querySelector(".form__main-button_place_new-card");
 
 /* Инпуты */
