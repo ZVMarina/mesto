@@ -30,12 +30,16 @@ const initialCards = [
 /* Модальное окно и форма */
 const modalEditInfo = document.querySelector(".modal_type_edit-info");
 const modalAddPlace = document.querySelector(".modal_type_add-card");
-const formProfile = document.querySelector(".form_place_profile");
+const modalViewCard = document.querySelector(".modal_type_view-image");
+const formProfile = document.querySelector(".form_type_profile");
 
 /* Кнопки */
-const closeButtons = document.querySelectorAll(".form__close-button");
-const addButton = document.querySelector(".form__main-button_place_popup-card");
-const saveButton = document.querySelector(".form__main-button_place_popup-profile");
+const popupProfileOpenBtn = document.querySelector(".profile__edit-button");
+const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
+const popupProfileCloseBtn = document.querySelector(".form__close-button_place_profile");
+const popupAddCardCloseBtn = document.querySelector(".form__close-button_place_new-card");
+const popupViewCardCloseBtn = document.querySelector(".form__close-button_place_image");
+const addButton = document.querySelector(".form__main-button_place_new-card");
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
@@ -48,32 +52,25 @@ const nickname = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
 
 /* Открыть модальное окно */
-
-function openModal(event) {
-    if (event.target.closest('.profile__edit-button')) {
-        modalEditInfo.classList.add("modal_open");
-
-        nameInput.value = nickname.textContent;
-        jobInput.value = job.textContent;
-    }
-
-    if (event.target.closest('.profile__add-button')) {
-        modalAddPlace.classList.add("modal_open");
-    }
+function openModal(modal) {
+    modal.classList.add("modal_open");
 }
 
 /* Закрыть модальное окно */
-function closeModal(event) {
-    if (event.target.closest('.modal_type_edit-info')) {
-        modalEditInfo.classList.remove("modal_open");
-    }
+function closeModal(modal) {
+    modal.classList.remove("modal_open");
+}
 
-    if (event.target.closest('.modal_type_add-card')) {
-        modalAddPlace.classList.remove("modal_open");
+/* Получить значения инпутов */
+function getValueInputs() {
+    nameInput.value = nickname.textContent;
+    jobInput.value = job.textContent;
+}
 
-        placeInput.value = '';
-        linkInput.value = '';
-    }
+/* Очистить инпуты */
+function clearInputs() {
+    placeInput.value = '';
+    linkInput.value = '';
 }
 
 /* Сохранить информацию профиля */
@@ -83,7 +80,7 @@ function saveInfo(event) {
     nickname.textContent = nameInput.value;
     job.textContent = jobInput.value;
 
-    closeModal(event);
+    closeModal(modalEditInfo);
 }
 
 /* Создание шаблона карточек */
@@ -108,11 +105,22 @@ function createTemplateCard(item) {
         removeCard(event.target);
     });
 
+    cardImage.addEventListener('click', () => {
+        const image = document.querySelector('.modal__image');
+        const titile = document.querySelector('.modal__image-title');
+
+        image.src = `${item.link}`;
+        image.alt = `${item.name}`;
+        titile.textContent = `${item.name}`
+
+        openModal(modalViewCard);
+    });
+
     return cardElement;
 }
 
 /* Рендеринг карточек */
-function renderCard() {
+function renderCards() {
     initialCards.forEach(item => {
         const cardTemplate = createTemplateCard(item);
 
@@ -128,14 +136,11 @@ function addCard(event) {
     card.name = placeInput.value;
     card.link = linkInput.value;
 
-    initialCards.push(card);
-    cardsElement.innerHTML = '';
-    renderCard()
+    cardsElement.prepend(createTemplateCard(card))
 
-    placeInput.value = '';
-    linkInput.value = '';
+    clearInputs();
 
-    closeModal(event);
+    closeModal(modalAddPlace);
 }
 
 /* Поставить лайк */
@@ -148,12 +153,15 @@ function removeCard(deleteButtonEl) {
     deleteButtonEl.closest('.card').remove();
 }
 
-closeButtons.forEach(item => {
-    item.addEventListener("click", closeModal);
-});
+/* Слушатели открытия формы */
+popupProfileOpenBtn.addEventListener('click', () => { openModal(modalEditInfo); getValueInputs() });
+popupAddCardOpenBtn.addEventListener('click', () => openModal(modalAddPlace));
 
-document.addEventListener('click', openModal);
-formProfile.addEventListener("submit", saveInfo);
-window.addEventListener('load', renderCard);
-addButton.addEventListener('click', addCard);
-saveButton.addEventListener('click', saveInfo);
+/* Слушатели закрытия формы */
+popupProfileCloseBtn.addEventListener('click', () => closeModal(modalEditInfo));
+popupAddCardCloseBtn.addEventListener('click', () => { closeModal(modalAddPlace); clearInputs() });
+popupViewCardCloseBtn.addEventListener('click', () => closeModal(modalViewCard));
+
+formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
+window.addEventListener('load', renderCards); /* Отрисовать карточки */
+addButton.addEventListener('click', addCard); /* Добавить карточку */
