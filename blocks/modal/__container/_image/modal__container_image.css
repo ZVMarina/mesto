@@ -5,6 +5,6 @@
     object-fit: contain;
     box-shadow: none;
     box-sizing: content-box;
-    max-width: 75vh;
-    max-height: 75vh;
+    width: auto;
+    max-width: initial;
 }
