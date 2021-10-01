@@ -154,12 +154,18 @@ function removeCard(deleteButtonEl) {
 }
 
 /* Слушатели открытия формы */
-popupProfileOpenBtn.addEventListener('click', () => { openPopup(popupEditInfo); getValueInputs() });
+popupProfileOpenBtn.addEventListener('click', () => {
+    openPopup(popupEditInfo);
+    getValueInputs()
+});
 popupAddCardOpenBtn.addEventListener('click', () => openPopup(popupAddPlace));
 
 /* Слушатели закрытия формы */
 popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
-popupAddCardCloseBtn.addEventListener('click', () => { closePopup(popupAddPlace); clearInputs() });
+popupAddCardCloseBtn.addEventListener('click', () => {
+    closePopup(popupAddPlace);
+    clearInputs()
+});
 popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard));
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
