@@ -51,6 +51,10 @@ const linkInput = document.querySelector(".form__input_value_link");
 const nickname = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
 
+/* Элементы формы view-image */
+const image = document.querySelector('.popup__image');
+const titile = document.querySelector('.popup__image-title');
+
 /* Открыть модальное окно */
 function openPopup(popup) {
     popup.classList.add("popup_open");
@@ -106,9 +110,6 @@ function createTemplateCard(item) {
     });
 
     cardImage.addEventListener('click', () => {
-        const image = document.querySelector('.popup__image');
-        const titile = document.querySelector('.popup__image-title');
-
         image.src = `${item.link}`;
         image.alt = `${item.name}`;
         titile.textContent = `${item.name}`
