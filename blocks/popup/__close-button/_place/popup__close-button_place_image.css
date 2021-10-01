@@ -1,0 +1,6 @@
+@media all and (max-width: 767px) {
+    .popup__close-button_place_image {
+        top: -48px;
+        right: 0;
+    }
+}
