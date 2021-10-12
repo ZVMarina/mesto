@@ -154,6 +154,52 @@ function removeCard(deleteButtonEl) {
     deleteButtonEl.closest('.card').remove();
 }
 
+/* Найти элемент ошибки */
+const findErrorElement = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    return errorElement;
+}
+
+/* Показать ошибку */
+const showError = (inputElement, errorElement) => {
+    errorElement.textContent = inputElement.validationMessage;
+}
+/* Скрыть ошибку */
+/*  */
+const checkInputValidity = (formElement, inputElement) => {
+    const isInputNotValid = !inputElement.validity.valid;
+
+    if (isInputNotValid) {
+        showError(inputElement, findErrorElement(formElement, inputElement))
+    }
+}
+
+/* Добавляет обработчики всем формам и полям */
+const setEventListeners = (formElement) => {
+    const inputList = formElement.querySelectorAll('.form__input');
+
+    inputList.forEach(inputElement => {
+        inputElement.addEventListener('input', () => {
+            checkInputValidity(formElement, inputElement);
+        })
+    })
+
+    formElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+    })
+}
+
+/* Находит и обрабатывает все формы */
+const enableValidation = () => {
+    const forms = document.querySelectorAll('.form');
+
+    forms.forEach(formElement => {
+        setEventListeners(formElement);
+    })
+}
+
+enableValidation();
+
 /* Слушатели открытия формы */
 popupProfileOpenBtn.addEventListener('click', () => {
     openPopup(popupEditInfo);
