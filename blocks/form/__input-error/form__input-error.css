@@ -1,0 +1,14 @@
+.form__input-error {
+    color: #ff0000;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+/* .form__input-error:first-of-type {
+    padding-bottom: 13px;
+}
+
+.form__input-error:last-of-type {
+    padding-bottom: 31px;
+} */

@@ -1,0 +1,11 @@
+.form__input_state_invalid {
+    margin-bottom: 5px;
+}
+
+.form__input_state_invalid:last-of-type {
+    margin-bottom: 0;
+}
+
+.form__input_state_invalid:first-of-type {
+    margin-bottom: 0;
+}

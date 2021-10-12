@@ -163,10 +163,12 @@ const findErrorElement = (formElement, inputElement) => {
 /* Показать ошибку */
 const showError = (inputElement, errorElement) => {
     errorElement.textContent = inputElement.validationMessage;
+    inputElement.classList.add('form__input_state_invalid');
 }
 /* Скрыть ошибку */
 const hideError = (inputElement, errorElement) => {
     errorElement.textContent = '';
+    inputElement.classList.remove('form__input_state_invalid');
 }
 
 /* Проверка инпутов на валидность */
