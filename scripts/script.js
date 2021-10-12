@@ -182,13 +182,28 @@ const checkInputValidity = (formElement, inputElement) => {
     }
 }
 
+/* Активировать/деактивировать кнопку */
+const toggleButtonState = (button, isActive) => {
+    if (isActive) {
+        button.classList.remove('.form__main-button_invalid');
+        button.disabled = false;
+    } else {
+        button.classList.add('.form__main-button_invalid');
+        button.disabled = 'true';
+    }
+}
+
 /* Добавляет обработчики всем формам и полям */
 const setEventListeners = (formElement) => {
     const inputList = formElement.querySelectorAll('.form__input');
+    const submitButton = formElement.querySelector('.form__main-button');
 
     inputList.forEach(inputElement => {
         inputElement.addEventListener('input', () => {
+            const isFormValid = formElement.checkValidity();
+
             checkInputValidity(formElement, inputElement);
+            toggleButtonState(submitButton, isFormValid);
         })
     })
 
