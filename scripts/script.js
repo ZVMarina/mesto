@@ -165,12 +165,18 @@ const showError = (inputElement, errorElement) => {
     errorElement.textContent = inputElement.validationMessage;
 }
 /* Скрыть ошибку */
-/*  */
+const hideError = (inputElement, errorElement) => {
+    errorElement.textContent = '';
+}
+
+/* Проверка инпутов на валидность */
 const checkInputValidity = (formElement, inputElement) => {
     const isInputNotValid = !inputElement.validity.valid;
 
     if (isInputNotValid) {
-        showError(inputElement, findErrorElement(formElement, inputElement))
+        showError(inputElement, findErrorElement(formElement, inputElement));
+    } else {
+        hideError(inputElement, findErrorElement(formElement, inputElement));
     }
 }
 
