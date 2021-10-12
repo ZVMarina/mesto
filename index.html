@@ -41,9 +41,11 @@
         <div class="popup popup_type_edit-info">
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="form form_type_profile" name="user-info">
-                    <input type="text" class="form__input form__input_value_name" name="user-name">
-                    <input type="text" class="form__input form__input_value_job" name="user-job">
+                <form class="form form_type_profile" name="user-info" novalidate>
+                    <input id="name-input" type="text" class="form__input form__input_value_name" name="user-name" minlength="2" maxlength="40" required>
+                    <span class="name-input-error form__input-error"></span>
+                    <input id="job-input" type="text" class="form__input form__input_value_job" name="user-job" minlength="2" maxlength="200" required>
+                    <span class="job-input-error form__input-error"></span>
                     <button class="form__main-button form__main-button_place_profile" type="submit">Сохранить</button>
                 </form>
                 <button class="popup__close-button popup__close-button_place_profile" type="button"
