@@ -185,10 +185,10 @@ const checkInputValidity = (formElement, inputElement) => {
 /* Активировать/деактивировать кнопку */
 const toggleButtonState = (button, isActive) => {
     if (isActive) {
-        button.classList.remove('.form__main-button_invalid');
+        button.classList.remove('form__main-button_invalid');
         button.disabled = false;
     } else {
-        button.classList.add('.form__main-button_invalid');
+        button.classList.add('form__main-button_invalid');
         button.disabled = 'true';
     }
 }
