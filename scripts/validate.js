@@ -13,49 +13,49 @@ const findErrorElement = (formElement, inputElement) => {
 }
 
 /* Показать ошибку */
-const showError = (inputElement, errorElement, validationConfig) => {
+const showError = (inputElement, errorElement, {inputErrorClass}) => {
     errorElement.textContent = inputElement.validationMessage;
-    inputElement.classList.add(validationConfig.inputErrorClass);
+    inputElement.classList.add(inputErrorClass);
 }
 /* Скрыть ошибку */
-const hideError = (inputElement, errorElement, validationConfig) => {
+const hideError = (inputElement, errorElement, {inputErrorClass}) => {
     errorElement.textContent = '';
-    inputElement.classList.remove(validationConfig.inputErrorClass);
+    inputElement.classList.remove(inputErrorClass);
 }
 
 /* Проверка инпутов на валидность */
-const checkInputValidity = (formElement, inputElement, validationConfig) => {
+const checkInputValidity = (formElement, inputElement, {...rest}) => {
     const isInputNotValid = !inputElement.validity.valid;
 
     if (isInputNotValid) {
-        showError(inputElement, findErrorElement(formElement, inputElement), validationConfig,);
+        showError(inputElement, findErrorElement(formElement, inputElement), rest);
     } else {
-        hideError(inputElement, findErrorElement(formElement, inputElement), validationConfig,);
+        hideError(inputElement, findErrorElement(formElement, inputElement), rest);
     }
 }
 
 /* Активировать/деактивировать кнопку */
-const toggleButtonState = (button, isActive, validationConfig) => {
+const toggleButtonState = (button, isActive, {inactiveButtonClass, ...rest}) => {
     if (isActive) {
-        button.classList.remove(validationConfig.inactiveButtonClass);
+        button.classList.remove(inactiveButtonClass);
         button.disabled = false;
     } else {
-        button.classList.add(validationConfig.inactiveButtonClass);
+        button.classList.add(inactiveButtonClass);
         button.disabled = 'true';
     }
 }
 
 /* Добавляет обработчики всем формам и полям */
-const setEventListeners = (formElement, validationConfig) => {
-    const inputList = formElement.querySelectorAll(validationConfig.inputSelector);
-    const submitButton = formElement.querySelector(validationConfig.submitButtonSelector);
+const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...rest}) => {
+    const inputList = formElement.querySelectorAll(inputSelector);
+    const submitButton = formElement.querySelector(submitButtonSelector);
 
     inputList.forEach(inputElement => {
         inputElement.addEventListener('input', () => {
             const isFormValid = formElement.checkValidity();
 
-            checkInputValidity(formElement, inputElement, validationConfig);
-            toggleButtonState(submitButton, isFormValid, validationConfig);
+            checkInputValidity(formElement, inputElement, rest);
+            toggleButtonState(submitButton, isFormValid, rest);
         })
     })
 
@@ -65,11 +65,11 @@ const setEventListeners = (formElement, validationConfig) => {
 }
 
 /* Находит и обрабатывает все формы */
-const enableValidation = (validationConfig) => {
-    const forms = document.querySelectorAll(validationConfig.formSelector);
+const enableValidation = ({formSelector, ...rest}) => {
+    const forms = document.querySelectorAll(formSelector);
 
     forms.forEach(formElement => {
-        setEventListeners(formElement, validationConfig);
+        setEventListeners(formElement, rest);
     })
 }
 
