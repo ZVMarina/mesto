@@ -31,7 +31,9 @@ const initialCards = [
 const popupEditInfo = document.querySelector(".popup_type_edit-info");
 const popupAddPlace = document.querySelector(".popup_type_add-card");
 const popupViewCard = document.querySelector(".popup_type_view-image");
+
 const formProfile = document.querySelector(".form_type_profile");
+const formAddCard = document.querySelector(".form_type_new-card");
 
 /* Кнопки */
 const popupProfileOpenBtn = document.querySelector(".profile__edit-button");
@@ -72,9 +74,15 @@ function getValueInputs() {
 }
 
 /* Очистить инпуты */
-function clearInputs() {
+function clearCardInputs() {
     placeInput.value = '';
     linkInput.value = '';
+
+    const inputList = formAddCard.querySelectorAll(validationConfig.inputSelector);
+
+    inputList.forEach(inputElement => {
+        hideError(inputElement,  findErrorElement(formAddCard, inputElement), validationConfig);
+    })
 }
 
 /* Сохранить информацию профиля */
@@ -139,7 +147,7 @@ function addCard(event) {
 
     cardsElement.prepend(createTemplateCard(card))
 
-    clearInputs();
+    clearCardInputs();
 
     closePopup(popupAddPlace);
 }
@@ -159,25 +167,33 @@ popupProfileOpenBtn.addEventListener('click', () => {
     openPopup(popupEditInfo);
     getValueInputs();
 });
-popupAddCardOpenBtn.addEventListener('click', () => openPopup(popupAddPlace));
+popupAddCardOpenBtn.addEventListener('click', () => {
+    const isFormValid = formAddCard.checkValidity();
+    const submitButton = formAddCard.querySelector(validationConfig.submitButtonSelector);
+
+    toggleButtonState(submitButton, isFormValid, validationConfig);
+    openPopup(popupAddPlace)
+});
 
 /* Слушатели закрытия формы */
 popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
 popupAddCardCloseBtn.addEventListener('click', () => {
     closePopup(popupAddPlace);
-    clearInputs()
+    clearCardInputs();
 });
 popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard));
 document.addEventListener('click', (evt) => {
     const popup = document.querySelector('.popup_open');
     if (evt.target === popup) {
         closePopup(popup);
+        clearCardInputs();
     }
 })
 document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
         const popup = document.querySelector('.popup_open');
         closePopup(popup);
+        clearCardInputs();
     }
 })
 

@@ -8,8 +8,7 @@ const validationConfig = {
 
 /* Найти элемент ошибки */
 const findErrorElement = (formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    return errorElement;
+    return formElement.querySelector(`.${inputElement.id}-error`);
 }
 
 /* Показать ошибку */
