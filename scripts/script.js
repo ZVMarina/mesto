@@ -81,7 +81,7 @@ function clearCardInputs() {
     const inputList = formAddCard.querySelectorAll(validationConfig.inputSelector);
 
     inputList.forEach(inputElement => {
-        hideError(inputElement,  findErrorElement(formAddCard, inputElement), validationConfig);
+        hideError(inputElement, findErrorElement(formAddCard, inputElement), validationConfig);
     })
 }
 
@@ -164,8 +164,19 @@ function removeCard(deleteButtonEl) {
 
 /* Слушатели открытия формы */
 popupProfileOpenBtn.addEventListener('click', () => {
-    openPopup(popupEditInfo);
     getValueInputs();
+
+    const inputList = formProfile.querySelectorAll(validationConfig.inputSelector);
+    const submitButton = formProfile.querySelector(validationConfig.submitButtonSelector);
+    const isFormValid = formProfile.checkValidity();
+
+    inputList.forEach(inputElement => {
+        checkInputValidity(formProfile, inputElement, validationConfig);
+    })
+
+    toggleButtonState(submitButton, isFormValid, validationConfig);
+
+    openPopup(popupEditInfo);
 });
 popupAddCardOpenBtn.addEventListener('click', () => {
     const isFormValid = formAddCard.checkValidity();
