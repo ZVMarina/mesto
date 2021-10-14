@@ -168,6 +168,12 @@ popupAddCardCloseBtn.addEventListener('click', () => {
     clearInputs()
 });
 popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard));
+document.addEventListener('click', (evt) => {
+    const popup = document.querySelector('.popup_open');
+    if (evt.target === popup) {
+        closePopup(popup);
+    }
+})
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 window.addEventListener('load', renderCards); /* Отрисовать карточки */
