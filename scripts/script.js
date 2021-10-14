@@ -174,6 +174,12 @@ document.addEventListener('click', (evt) => {
         closePopup(popup);
     }
 })
+document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+        const popup = document.querySelector('.popup_open');
+        closePopup(popup);
+    }
+})
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 window.addEventListener('load', renderCards); /* Отрисовать карточки */
