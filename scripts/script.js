@@ -157,7 +157,7 @@ function removeCard(deleteButtonEl) {
 /* Слушатели открытия формы */
 popupProfileOpenBtn.addEventListener('click', () => {
     openPopup(popupEditInfo);
-    getValueInputs()
+    getValueInputs();
 });
 popupAddCardOpenBtn.addEventListener('click', () => openPopup(popupAddPlace));
 
