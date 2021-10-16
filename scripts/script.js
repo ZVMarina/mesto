@@ -61,11 +61,13 @@ const titile = document.querySelector('.popup__image-title');
 /* Открыть модальное окно */
 function openPopup(popup) {
     popup.classList.add("popup_open");
+    document.addEventListener('keydown', closeByEscape);
 }
 
 /* Закрыть модальное окно */
 function closePopup(popup) {
     popup.classList.remove("popup_open");
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 /* Получить значения инпутов */
@@ -175,15 +177,11 @@ function closeByEscape(evt) {
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_open');
         closePopup(openedPopup);
-
-        document.removeEventListener('keydown', closeByEscape);
     }
 }
 
 /* Слушатели открытия формы */
 popupProfileOpenBtn.addEventListener('click', () => {
-    document.addEventListener('keydown', closeByEscape);
-
     getValueInputs();
 
     const inputList = formProfile.querySelectorAll(validationConfig.inputSelector);
@@ -199,8 +197,6 @@ popupProfileOpenBtn.addEventListener('click', () => {
     openPopup(popupEditInfo);
 });
 popupAddCardOpenBtn.addEventListener('click', () => {
-    document.addEventListener('keydown', closeByEscape);
-
     const isFormValid = formAddCard.checkValidity();
     const submitButton = formAddCard.querySelector(validationConfig.submitButtonSelector);
 
