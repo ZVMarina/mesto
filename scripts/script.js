@@ -175,11 +175,15 @@ function closeByEscape(evt) {
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_open');
         closePopup(openedPopup);
+
+        document.removeEventListener('keydown', closeByEscape);
     }
 }
 
 /* Слушатели открытия формы */
 popupProfileOpenBtn.addEventListener('click', () => {
+    document.addEventListener('keydown', closeByEscape);
+
     getValueInputs();
 
     const inputList = formProfile.querySelectorAll(validationConfig.inputSelector);
@@ -195,6 +199,8 @@ popupProfileOpenBtn.addEventListener('click', () => {
     openPopup(popupEditInfo);
 });
 popupAddCardOpenBtn.addEventListener('click', () => {
+    document.addEventListener('keydown', closeByEscape);
+
     const isFormValid = formAddCard.checkValidity();
     const submitButton = formAddCard.querySelector(validationConfig.submitButtonSelector);
 
@@ -212,11 +218,6 @@ popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard))
 popups.forEach((popup) => {
     popup.addEventListener('click', handleOverlay)
 })
-
-/* Слушатели закрытия формы при нажатии на Escape */
-document.addEventListener('keydown', closeByEscape);
-/* document.removeEventListener('keydown', closeByEscape); */
-
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 formAddCard.addEventListener('submit', addCard); /* Добавить карточку */
