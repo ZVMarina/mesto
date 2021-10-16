@@ -42,6 +42,7 @@ const popupProfileCloseBtn = document.querySelector(".popup__close-button_place_
 const popupAddCardCloseBtn = document.querySelector(".popup__close-button_place_new-card");
 const popupViewCardCloseBtn = document.querySelector(".popup__close-button_place_image");
 const addButton = document.querySelector(".form__main-button_place_new-card");
+const popups = document.querySelectorAll('.popup')
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
@@ -162,6 +163,13 @@ function removeCard(deleteButtonEl) {
     deleteButtonEl.closest('.card').remove();
 }
 
+/* Обработчик оверлея */
+const handleOverlay = (evt) => {
+    if (evt.target === evt.currentTarget) {
+        closePopup(evt.target)
+    }
+}
+
 /* Слушатели открытия формы */
 popupProfileOpenBtn.addEventListener('click', () => {
     getValueInputs();
@@ -193,12 +201,8 @@ popupAddCardCloseBtn.addEventListener('click', () => {
     clearCardInputs();
 });
 popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard));
-document.addEventListener('click', (evt) => {
-    const popup = document.querySelector('.popup_open');
-    if (evt.target === popup) {
-        closePopup(popup);
-        clearCardInputs();
-    }
+popups.forEach((popup) => {
+    popup.addEventListener('click', handleOverlay)
 })
 document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
@@ -207,6 +211,7 @@ document.addEventListener('keydown', (evt) => {
         clearCardInputs();
     }
 })
+
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 window.addEventListener('load', renderCards); /* Отрисовать карточки */
