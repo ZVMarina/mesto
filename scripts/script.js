@@ -28,6 +28,7 @@ const initialCards = [
 ];
 
 /* Модальное окно и форма */
+const popups = document.querySelectorAll('.popup')
 const popupEditInfo = document.querySelector(".popup_type_edit-info");
 const popupAddPlace = document.querySelector(".popup_type_add-card");
 const popupViewCard = document.querySelector(".popup_type_view-image");
@@ -162,8 +163,27 @@ function removeCard(deleteButtonEl) {
     deleteButtonEl.closest('.card').remove();
 }
 
+/* Закрытие по оверлею */
+function handleOverlay(evt) {
+    if (evt.target === evt.currentTarget) {
+        closePopup(evt.target)
+    }
+}
+
+/* Закрытие по нажатию Escape */
+function closeByEscape(evt) {
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_open');
+        closePopup(openedPopup);
+
+        document.removeEventListener('keydown', closeByEscape);
+    }
+}
+
 /* Слушатели открытия формы */
 popupProfileOpenBtn.addEventListener('click', () => {
+    document.addEventListener('keydown', closeByEscape);
+
     getValueInputs();
 
     const inputList = formProfile.querySelectorAll(validationConfig.inputSelector);
@@ -179,35 +199,26 @@ popupProfileOpenBtn.addEventListener('click', () => {
     openPopup(popupEditInfo);
 });
 popupAddCardOpenBtn.addEventListener('click', () => {
+    document.addEventListener('keydown', closeByEscape);
+
     const isFormValid = formAddCard.checkValidity();
     const submitButton = formAddCard.querySelector(validationConfig.submitButtonSelector);
 
     toggleButtonState(submitButton, isFormValid, validationConfig);
+    clearCardInputs();
     openPopup(popupAddPlace)
 });
 
-/* Слушатели закрытия формы */
+/* Слушатели закрытия формы при клике на крестик */
 popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
-popupAddCardCloseBtn.addEventListener('click', () => {
-    closePopup(popupAddPlace);
-    clearCardInputs();
-});
+popupAddCardCloseBtn.addEventListener('click', () => closePopup(popupAddPlace));
 popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard));
-document.addEventListener('click', (evt) => {
-    const popup = document.querySelector('.popup_open');
-    if (evt.target === popup) {
-        closePopup(popup);
-        clearCardInputs();
-    }
-})
-document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-        const popup = document.querySelector('.popup_open');
-        closePopup(popup);
-        clearCardInputs();
-    }
+
+/* Слушатель закрытия формы при клике на оверлей */
+popups.forEach((popup) => {
+    popup.addEventListener('click', handleOverlay)
 })
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
+formAddCard.addEventListener('submit', addCard); /* Добавить карточку */
 window.addEventListener('load', renderCards); /* Отрисовать карточки */
-addButton.addEventListener('click', addCard); /* Добавить карточку */
