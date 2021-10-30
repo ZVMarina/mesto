@@ -30,6 +30,15 @@ const initialCards = [
     }
 ];
 
+/* Объект настроек с селекторами и классами формы */
+const validationConfig = {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__main-button',
+    inactiveButtonClass: 'form__main-button_invalid',
+    inputErrorClass: 'form__input_state_invalid'
+};
+
 /* Модальные окна*/
 const popups = document.querySelectorAll('.popup')
 const popupViewCard = document.querySelector(".popup_type_view-image");
@@ -57,6 +66,10 @@ const linkInput = document.querySelector(".form__input_value_link");
 /* Значения инпутов */
 const nickname = document.querySelector(".profile__title");
 const job = document.querySelector(".profile__subtitle");
+
+/* Экземпляры класса FormValidator */
+const cardFormValidate = new FormValidator(validationConfig, formAddCard);
+const profileFormValidate = new FormValidator(validationConfig, formProfile);
 
 function renderCards() {
     initialCards.forEach(item => {
@@ -129,6 +142,17 @@ function addCard(event) {
     closePopup(popupAddPlace);
 }
 
+/* Очистить инпуты */
+function clearCardInputs() {
+    placeInput.value = '';
+    linkInput.value = '';
+
+    cardFormValidate.clearInputsErrors();
+}
+
+cardFormValidate.enableValidation();
+profileFormValidate.enableValidation();
+
 window.addEventListener('load', renderCards); /* Отрисовать карточки */
 
 /* Слушатели открытия */
@@ -144,9 +168,27 @@ cardsElement.addEventListener('click', (event) => {
         openPopup(popupViewCard);
     }
 })
+popupProfileOpenBtn.addEventListener('click', () => {
+    getValueInputs();
+    profileFormValidate.clearInputsErrors();
 
-/* Слушатели закрытия */
+    const isFormValid = formProfile.checkValidity();
+    profileFormValidate.toggleButtonState(isFormValid);
+
+    openPopup(popupEditInfo);
+});
+
+popupAddCardOpenBtn.addEventListener('click', () => {
+    clearCardInputs();
+    const isFormValid = formAddCard.checkValidity();
+    cardFormValidate.toggleButtonState(isFormValid);
+    openPopup(popupAddPlace)
+});
+
+/* Слушатели закрытия формы при клике на крестик */
 popupViewCardCloseBtn.addEventListener('click', () => closePopup(popupViewCard));
+popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
+popupAddCardCloseBtn.addEventListener('click', () => closePopup(popupAddPlace));
 
 /* Слушатель закрытия при клике на оверлей */
 popups.forEach((popup) => {
@@ -155,48 +197,4 @@ popups.forEach((popup) => {
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 formAddCard.addEventListener('submit', addCard); /* Добавить карточку */
-
-
-
-
-
-const validationConfig = {
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__main-button',
-    inactiveButtonClass: 'form__main-button_invalid',
-    inputErrorClass: 'form__input_state_invalid'
-};
-
-
-const cardFormValidate = new FormValidator(validationConfig, formAddCard);
-const profileFormValidate = new FormValidator(validationConfig, formProfile);
-
-cardFormValidate.enableValidation();
-profileFormValidate.enableValidation();
-
-
-/* Очистить инпуты */
-function clearCardInputs() {
-    placeInput.value = '';
-    linkInput.value = '';
-
-    cardFormValidate.hideInputsErrors();
-}
-
-
-/* Слушатели открытия формы */
-popupProfileOpenBtn.addEventListener('click', () => {
-    getValueInputs();
-    openPopup(popupEditInfo);
-});
-
-popupAddCardOpenBtn.addEventListener('click', () => {
-    clearCardInputs();
-    openPopup(popupAddPlace)
-});
-
-/* Слушатели закрытия формы при клике на крестик */
-popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
-popupAddCardCloseBtn.addEventListener('click', () => closePopup(popupAddPlace));
 
