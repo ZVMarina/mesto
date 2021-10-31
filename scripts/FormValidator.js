@@ -67,7 +67,7 @@ export default class FormValidator {
             this.submitButton.disabled = false;
         } else {
             this.submitButton.classList.add(this._config.inactiveButtonClass);
-            this.submitButton.disabled = 'true';
+            this.submitButton.disabled = true;
         }
     }
 }
