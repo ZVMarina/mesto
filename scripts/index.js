@@ -37,12 +37,17 @@ const job = document.querySelector(".profile__subtitle");
 const cardFormValidate = new FormValidator(validationConfig, formAddCard);
 const profileFormValidate = new FormValidator(validationConfig, formProfile);
 
-function renderCards() {
-    initialCards.forEach(item => {
-        const card = new Card(item, '.cards-template');
-        const cardElement = card.generateCard();
+/* Создать экземпляр класса */
+function createClassInstance(cardObj) {
+    const card = new Card(cardObj, '.cards-template');
+    const cardElement = card.generateCard();
+    return cardElement;
+}
 
-        cardsElement.append(cardElement);
+/* Отрисовать карточки */
+function renderCards() {
+    initialCards.forEach(cardObj => {
+        cardsElement.append(createClassInstance(cardObj));
     })
 }
 
@@ -98,10 +103,7 @@ function addCard(event) {
         link: linkInput.value
     };
 
-    const card = new Card(newCardValues, '.cards-template');
-    const cardElement = card.generateCard();
-
-    cardsElement.prepend(cardElement)
+    cardsElement.prepend(createClassInstance(newCardValues));
 
     clearCardInputs();
 
