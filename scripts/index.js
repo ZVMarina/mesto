@@ -133,6 +133,7 @@ function handleCardImageClick(link, name) {
     openPopup(popupViewCard);
 }
 
+/* Слушатель открытия формы редактирования профиля */
 popupProfileOpenBtn.addEventListener('click', () => {
     getValueInputs();
     profileFormValidate.clearInputsErrors();
@@ -143,6 +144,7 @@ popupProfileOpenBtn.addEventListener('click', () => {
     openPopup(popupEditInfo);
 });
 
+/* Слушатель открытия формы добавления карточки */
 popupAddCardOpenBtn.addEventListener('click', () => {
     clearCardInputs();
     const isFormValid = formAddCard.checkValidity();
