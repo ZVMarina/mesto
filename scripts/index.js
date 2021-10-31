@@ -37,9 +37,12 @@ const job = document.querySelector(".profile__subtitle");
 const cardFormValidate = new FormValidator(validationConfig, formAddCard);
 const profileFormValidate = new FormValidator(validationConfig, formProfile);
 
+cardFormValidate.enableValidation();
+profileFormValidate.enableValidation();
+
 /* Создать экземпляр класса */
 function createClassInstance(cardObj) {
-    const card = new Card(cardObj, '.cards-template');
+    const card = new Card(cardObj, '.cards-template', handleCardImageClick);
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -68,13 +71,6 @@ function closeByEscape(evt) {
     if (evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_open');
         closePopup(openedPopup);
-    }
-}
-
-/* Закрытие по оверлею */
-function handleOverlay(evt) {
-    if (evt.target === evt.currentTarget) {
-        closePopup(evt.target)
     }
 }
 
@@ -118,24 +114,25 @@ function clearCardInputs() {
     cardFormValidate.clearInputsErrors();
 }
 
-cardFormValidate.enableValidation();
-profileFormValidate.enableValidation();
+/* Обработчик закрытия по оверлею */
+function handleOverlay(evt) {
+    if (evt.target === evt.currentTarget) {
+        closePopup(evt.target)
+    }
+}
 
-window.addEventListener('load', renderCards); /* Отрисовать карточки */
-
-/* Слушатели открытия */
-cardsElement.addEventListener('click', (event) => {
+/* Обработчик клика по картинке */
+function handleCardImageClick(link, name) {
     const image = document.querySelector('.popup__image');
     const title = document.querySelector('.popup__image-title');
 
-    if (event.target.closest('.card__image')) {
-        image.src = `${event.target.src}`;
-        image.alt = `${event.target.alt}`;
-        title.textContent = `${event.target.alt}`;
+    image.src = link;
+    image.alt = name;
+    title.textContent = name;
 
-        openPopup(popupViewCard);
-    }
-})
+    openPopup(popupViewCard);
+}
+
 popupProfileOpenBtn.addEventListener('click', () => {
     getValueInputs();
     profileFormValidate.clearInputsErrors();
@@ -165,4 +162,6 @@ popups.forEach((popup) => {
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 formAddCard.addEventListener('submit', addCard); /* Добавить карточку */
+
+window.addEventListener('load', renderCards); /* Отрисовать карточки */
 
