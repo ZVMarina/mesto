@@ -1,26 +1,26 @@
 export default class FormValidator {
     constructor(config, formElement) {
-        this.config = config;
+        this._config = config;
         this.formElement = formElement;
-        this.inputList = formElement.querySelectorAll(this.config.inputSelector);
-        this.submitButton = formElement.querySelector(this.config.submitButtonSelector);
+        this.inputList = formElement.querySelectorAll(this._config.inputSelector);
+        this.submitButton = formElement.querySelector(this._config.submitButtonSelector);
     }
 
     enableValidation() {
-        this._setEventListeners(this.formElement, this.config);
+        this._setEventListeners(this.formElement, this._config);
     }
 
     /* Добавляет обработчики всем формам и полям */
-    _setEventListeners(formElement, { inputSelector, submitButtonSelector, ...rest }) {
-        formElement.addEventListener('submit', (evt) => {
+    _setEventListeners({inputSelector, submitButtonSelector, ...rest }) {
+        this.formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
 
         this.inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
-                const isFormValid = formElement.checkValidity();
+                const isFormValid = this.formElement.checkValidity();
 
-                this._checkInputValidity(formElement, inputElement, rest);
+                this._checkInputValidity(this.formElement, inputElement, rest);
                 this.toggleButtonState(isFormValid);
             })
         })
@@ -45,7 +45,7 @@ export default class FormValidator {
 
     clearInputsErrors() {
         this.inputList.forEach(inputElement => {
-            this._hideError(inputElement, this._findErrorElement(this.formElement, inputElement), this.config);
+            this._hideError(inputElement, this._findErrorElement(this.formElement, inputElement), this._config);
         })
     }
 
@@ -63,10 +63,10 @@ export default class FormValidator {
     /* Активировать/деактивировать кнопку */
     toggleButtonState(isActive) {
         if (isActive) {
-            this.submitButton.classList.remove(this.config.inactiveButtonClass);
+            this.submitButton.classList.remove(this._config.inactiveButtonClass);
             this.submitButton.disabled = false;
         } else {
-            this.submitButton.classList.add(this.config.inactiveButtonClass);
+            this.submitButton.classList.add(this._config.inactiveButtonClass);
             this.submitButton.disabled = 'true';
         }
     }

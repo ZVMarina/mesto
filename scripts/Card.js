@@ -47,6 +47,6 @@ export default class Card {
     }
 
     _removeCard() {
-        this._element.querySelector('.card__button_type_delete').closest('.card').remove();
+        this._element.remove();
     }
 }
