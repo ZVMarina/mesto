@@ -7,11 +7,11 @@ export default class FormValidator {
     }
 
     enableValidation() {
-        this._setEventListeners(this.formElement, this._config);
+        this._setEventListeners();
     }
 
     /* Добавляет обработчики всем формам и полям */
-    _setEventListeners({inputSelector, submitButtonSelector, ...rest }) {
+    _setEventListeners() {
         this.formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
@@ -20,43 +20,43 @@ export default class FormValidator {
             inputElement.addEventListener('input', () => {
                 const isFormValid = this.formElement.checkValidity();
 
-                this._checkInputValidity(this.formElement, inputElement, rest);
+                this._checkInputValidity(inputElement);
                 this.toggleButtonState(isFormValid);
             })
         })
     }
 
     /* Найти элемент ошибки */
-    _findErrorElement(formElement, inputElement) {
-        return formElement.querySelector(`.${inputElement.id}-error`);
+    _findErrorElement(inputElement) {
+        return this.formElement.querySelector(`.${inputElement.id}-error`);
     }
 
     /* Показать ошибку */
-    _showError(inputElement, errorElement, { inputErrorClass }) {
+    _showError(inputElement, errorElement) {
         errorElement.textContent = inputElement.validationMessage;
-        inputElement.classList.add(inputErrorClass);
+        inputElement.classList.add(this._config.inputErrorClass);
     }
 
     /* Скрыть ошибку */
-    _hideError(inputElement, errorElement, { inputErrorClass }) {
+    _hideError(inputElement, errorElement) {
         errorElement.textContent = '';
-        inputElement.classList.remove(inputErrorClass);
+        inputElement.classList.remove(this._config.inputErrorClass);
     }
 
     clearInputsErrors() {
         this.inputList.forEach(inputElement => {
-            this._hideError(inputElement, this._findErrorElement(this.formElement, inputElement), this._config);
+            this._hideError(inputElement, this._findErrorElement(inputElement), this._config);
         })
     }
 
     /* Проверка инпутов на валидность */
-    _checkInputValidity(formElement, inputElement, { ...rest }) {
+    _checkInputValidity(inputElement) {
         const isInputNotValid = !inputElement.validity.valid;
 
         if (isInputNotValid) {
-            this._showError(inputElement, this._findErrorElement(formElement, inputElement), rest);
+            this._showError(inputElement, this._findErrorElement(inputElement));
         } else {
-            this._hideError(inputElement, this._findErrorElement(formElement, inputElement), rest);
+            this._hideError(inputElement, this._findErrorElement(inputElement));
         }
     }
 
