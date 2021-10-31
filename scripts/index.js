@@ -136,10 +136,9 @@ function handleCardImageClick(link, name) {
 /* Слушатель открытия формы редактирования профиля */
 popupProfileOpenBtn.addEventListener('click', () => {
     getValueInputs();
-    profileFormValidate.clearInputsErrors();
 
-    const isFormValid = formProfile.checkValidity();
-    profileFormValidate.toggleButtonState(isFormValid);
+    profileFormValidate.clearInputsErrors();
+    profileFormValidate.toggleButtonState();
 
     openPopup(popupEditInfo);
 });
@@ -147,8 +146,9 @@ popupProfileOpenBtn.addEventListener('click', () => {
 /* Слушатель открытия формы добавления карточки */
 popupAddCardOpenBtn.addEventListener('click', () => {
     clearCardInputs();
-    const isFormValid = formAddCard.checkValidity();
-    cardFormValidate.toggleButtonState(isFormValid);
+
+    cardFormValidate.toggleButtonState();
+
     openPopup(popupAddPlace)
 });
 
