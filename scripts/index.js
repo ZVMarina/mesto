@@ -6,7 +6,6 @@ import {validationConfig, initialCards} from './data.js';
 const cardsElement = document.querySelector(".elements__cards");
 
 /* Модальные окна*/
-const popups = document.querySelectorAll('.popup')
 const popupViewCard = document.querySelector(".popup_type_view-image");
 const popupEditInfo = document.querySelector(".popup_type_edit-info");
 const popupAddPlace = document.querySelector(".popup_type_add-card");
@@ -21,7 +20,6 @@ const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
 const popupProfileCloseBtn = document.querySelector(".popup__close-button_place_profile");
 const popupAddCardCloseBtn = document.querySelector(".popup__close-button_place_new-card");
 const popupViewCardCloseBtn = document.querySelector(".popup__close-button_place_image");
-const addButton = document.querySelector(".form__main-button_place_new-card");
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
@@ -158,9 +156,9 @@ popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
 popupAddCardCloseBtn.addEventListener('click', () => closePopup(popupAddPlace));
 
 /* Слушатель закрытия при клике на оверлей */
-popups.forEach((popup) => {
-    popup.addEventListener('click', handleOverlay)
-})
+popupViewCard.addEventListener('click', handleOverlay);
+popupEditInfo.addEventListener('click', handleOverlay);
+popupAddPlace.addEventListener('click', handleOverlay);
 
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 formAddCard.addEventListener('submit', addCard); /* Добавить карточку */

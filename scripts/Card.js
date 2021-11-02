@@ -3,7 +3,7 @@ export default class Card {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        this.handleCardImageClick = handleCardImageClick;
+        this._handleCardImageClick = handleCardImageClick;
     }
 
     _getTemplate() {
@@ -44,7 +44,7 @@ export default class Card {
 
         /* Open card */
         this._element.querySelector('.card__image').addEventListener('click', () => {
-            this.handleCardImageClick(this._link, this._name);
+            this._handleCardImageClick(this._link, this._name);
         });
     }
 

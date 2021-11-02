@@ -1,9 +1,9 @@
 export default class FormValidator {
     constructor(config, formElement) {
         this._config = config;
-        this.formElement = formElement;
-        this.inputList = formElement.querySelectorAll(this._config.inputSelector);
-        this.submitButton = formElement.querySelector(this._config.submitButtonSelector);
+        this._formElement = formElement;
+        this._inputList = formElement.querySelectorAll(this._config.inputSelector);
+        this._submitButton = formElement.querySelector(this._config.submitButtonSelector);
     }
 
     enableValidation() {
@@ -12,11 +12,11 @@ export default class FormValidator {
 
     /* Добавляет обработчики всем формам и полям */
     _setEventListeners() {
-        this.formElement.addEventListener('submit', (evt) => {
+        this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
         })
 
-        this.inputList.forEach(inputElement => {
+        this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement);
                 this.toggleButtonState();
@@ -26,7 +26,7 @@ export default class FormValidator {
 
     /* Найти элемент ошибки */
     _findErrorElement(inputElement) {
-        return this.formElement.querySelector(`.${inputElement.id}-error`);
+        return this._formElement.querySelector(`.${inputElement.id}-error`);
     }
 
     /* Показать ошибку */
@@ -42,8 +42,8 @@ export default class FormValidator {
     }
 
     clearInputsErrors() {
-        this.inputList.forEach(inputElement => {
-            this._hideError(inputElement, this._findErrorElement(inputElement), this._config);
+        this._inputList.forEach(inputElement => {
+            this._hideError(inputElement, this._findErrorElement(inputElement));
         })
     }
 
@@ -60,14 +60,14 @@ export default class FormValidator {
 
     /* Активировать/деактивировать кнопку */
     toggleButtonState() {
-        const isFormValid = this.formElement.checkValidity();
+        const isFormValid = this._formElement.checkValidity();
 
         if (isFormValid) {
-            this.submitButton.classList.remove(this._config.inactiveButtonClass);
-            this.submitButton.disabled = false;
+            this._submitButton.classList.remove(this._config.inactiveButtonClass);
+            this._submitButton.disabled = false;
         } else {
-            this.submitButton.classList.add(this._config.inactiveButtonClass);
-            this.submitButton.disabled = true;
+            this._submitButton.classList.add(this._config.inactiveButtonClass);
+            this._submitButton.disabled = true;
         }
     }
 }
