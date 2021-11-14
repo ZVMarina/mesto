@@ -1,7 +1,7 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import {validationConfig, initialCards} from './data.js';
+import { validationConfig, initialCards } from './data.js';
 
 /* Карточки */
 const cardsElement = document.querySelector(".elements__cards");
@@ -40,17 +40,10 @@ cardFormValidate.enableValidation();
 profileFormValidate.enableValidation();
 
 /* Создать экземпляр класса */
-function createClassInstance(cardObj) {
-    const card = new Card(cardObj, '.cards-template', handleCardImageClick);
+function createClassInstance(cardItem) {
+    const card = new Card(cardItem, '.cards-template', handleCardImageClick);
     const cardElement = card.generateCard();
     return cardElement;
-}
-
-/* Отрисовать карточки */
-function renderCards() {
-    initialCards.forEach(cardObj => {
-        cardsElement.append(createClassInstance(cardObj));
-    })
 }
 
 /* Открыть модальное окно */
@@ -164,5 +157,20 @@ popupAddPlace.addEventListener('click', handleOverlay);
 formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
 formAddCard.addEventListener('submit', addCard); /* Добавить карточку */
 
-window.addEventListener('load', renderCards); /* Отрисовать карточки */
+/* Отрисовать карточки */
+const cardsList = new Section({
+    items: initialCards,
+    renderer: (cardItem) => {
+        rendererCard(cardItem)
+    }
+}, '.elements__cards');
 
+function rendererCard(cardItem) {
+    const card = new Card(cardItem, '.cards-template', handleCardImageClick);
+    const cardElement = card.generateCard();
+
+    cardsList.addItem(cardElement);
+}
+
+
+cardsList.renderCards();
