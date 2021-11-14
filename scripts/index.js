@@ -1,11 +1,8 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import {PopupWithImage, PopupWithForm} from './Popup.js';
+import { PopupWithImage, PopupWithForm } from './Popup.js';
 import { validationConfig, initialCards } from './data.js';
-
-const popupEditInfo = document.querySelector(".popup_type_edit-info");
-const popupAddPlace = document.querySelector(".popup_type_add-card");
 
 /* Формы */
 const formProfile = document.querySelector(".form_type_profile");
@@ -14,19 +11,14 @@ const formAddCard = document.querySelector(".form_type_new-card");
 /* Кнопки */
 const popupProfileOpenBtn = document.querySelector(".profile__edit-button");
 const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
-const popupProfileCloseBtn = document.querySelector(".popup__close-button_place_profile");
-const popupAddCardCloseBtn = document.querySelector(".popup__close-button_place_new-card");
-const popupViewCardCloseBtn = document.querySelector(".popup__close-button_place_image");
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
 const jobInput = document.querySelector(".form__input_value_job");
-const placeInput = document.querySelector(".form__input_value_place");
-const linkInput = document.querySelector(".form__input_value_link");
 
 /* Значения инпутов */
 const nickname = document.querySelector(".profile__title");
-const job = document.querySelector(".profile__subtitle");
+const jobSubtitle = document.querySelector(".profile__subtitle");
 
 /* Экземпляры класса FormValidator */
 const cardFormValidate = new FormValidator(validationConfig, formAddCard);
@@ -35,6 +27,15 @@ const profileFormValidate = new FormValidator(validationConfig, formProfile);
 cardFormValidate.enableValidation();
 profileFormValidate.enableValidation();
 
+const sectionData = {
+    items: initialCards,
+    renderer: (cardItem) => {
+        rendererCard(cardItem)
+    }
+}
+
+const cardsList = new Section(sectionData, '.elements__cards');
+
 const popupImage = new PopupWithImage('.popup_type_view-image');
 const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo, handleClearInputsErrors);
 const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard, handleClearInputsErrors);
@@ -42,33 +43,42 @@ const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard, handleCl
 /* Получить значения инпутов */
 function getValueInputs() {
     nameInput.value = nickname.textContent;
-    jobInput.value = job.textContent;
+    jobInput.value = jobSubtitle.textContent;
 }
 
 /* Сохранить информацию профиля */
-function saveInfo(event) {
+function saveInfo(event, { name, job }) {
     event.preventDefault();
 
-    nickname.textContent = nameInput.value;
-    job.textContent = jobInput.value;
+    nickname.textContent = name;
+    jobSubtitle.textContent = job;
 }
 
 /* Добавить карточку */
-function addCard(event) {
+function addCard(event, {place, link}) {
     event.preventDefault();
 
     const newCardValues = {
-        name: placeInput.value,
-        link: linkInput.value
+        name: place,
+        link: link
     };
 
     rendererCard(newCardValues);
+}
+
+/* Отрисовать карточку */
+function rendererCard(cardItem) {
+    const card = new Card(cardItem, '.cards-template', handleCardImageClick);
+    const cardElement = card.generateCard();
+
+    cardsList.addItem(cardElement);
 }
 
 /* Очистить инпуты */
 function handleClearInputsErrors() {
     cardFormValidate.clearInputsErrors();
 }
+
 
 /* Обработчик клика по картинке */
 function handleCardImageClick(link, name) {
@@ -92,21 +102,6 @@ popupAddCardOpenBtn.addEventListener('click', () => {
 
     popupFormAdd.open();
 });
-
-/* Экземпляр карточки */
-const cardsList = new Section({
-    items: initialCards,
-    renderer: (cardItem) => {
-        rendererCard(cardItem)
-    }
-}, '.elements__cards');
-
-function rendererCard(cardItem) {
-    const card = new Card(cardItem, '.cards-template', handleCardImageClick);
-    const cardElement = card.generateCard();
-
-    cardsList.addItem(cardElement);
-}
 
 
 cardsList.renderCards();
