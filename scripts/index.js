@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 import {validationConfig, initialCards} from './data.js';
 
 /* Карточки */
