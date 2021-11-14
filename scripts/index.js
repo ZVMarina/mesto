@@ -36,8 +36,8 @@ cardFormValidate.enableValidation();
 profileFormValidate.enableValidation();
 
 const popupImage = new PopupWithImage('.popup_type_view-image');
-const popupFormEdit = new PopupWithForm('.popup_type_edit-info');
-const popupFormAdd = new PopupWithForm('.popup_type_add-card');
+const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo, handleClearInputsErrors);
+const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard, handleClearInputsErrors);
 
 /* Получить значения инпутов */
 function getValueInputs() {
@@ -51,8 +51,6 @@ function saveInfo(event) {
 
     nickname.textContent = nameInput.value;
     job.textContent = jobInput.value;
-
-    closePopup(popupEditInfo);
 }
 
 /* Добавить карточку */
@@ -65,25 +63,11 @@ function addCard(event) {
     };
 
     rendererCard(newCardValues);
-
-    clearCardInputs();
-
-    closePopup(popupAddPlace);
 }
 
 /* Очистить инпуты */
-function clearCardInputs() {
-    placeInput.value = '';
-    linkInput.value = '';
-
+function handleClearInputsErrors() {
     cardFormValidate.clearInputsErrors();
-}
-
-/* Обработчик закрытия по оверлею */
-function handleOverlay(evt) {
-    if (evt.target === evt.currentTarget) {
-        closePopup(evt.target)
-    }
 }
 
 /* Обработчик клика по картинке */
@@ -98,25 +82,16 @@ popupProfileOpenBtn.addEventListener('click', () => {
     profileFormValidate.clearInputsErrors();
     profileFormValidate.toggleButtonState();
 
-    /* openPopup(popupEditInfo); */
+    popupFormEdit.open();
 });
 
 /* Слушатель открытия формы добавления карточки */
 popupAddCardOpenBtn.addEventListener('click', () => {
-    clearCardInputs();
 
     cardFormValidate.toggleButtonState();
 
-    /* openPopup(popupAddPlace) */
+    popupFormAdd.open();
 });
-
-/* Слушатели закрытия формы при клике на крестик */
-popupViewCardCloseBtn.addEventListener('click', () => popupImage.close());
-popupProfileCloseBtn.addEventListener('click', () => closePopup(popupEditInfo));
-popupAddCardCloseBtn.addEventListener('click', () => closePopup(popupAddPlace));
-
-formProfile.addEventListener("submit", saveInfo); /* Сохранить информацию профиля */
-formAddCard.addEventListener('submit', addCard); /* Добавить карточку */
 
 /* Экземпляр карточки */
 const cardsList = new Section({
