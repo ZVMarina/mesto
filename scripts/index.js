@@ -17,10 +17,6 @@ const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
 const nameInput = document.querySelector(".form__input_value_name");
 const jobInput = document.querySelector(".form__input_value_job");
 
-/* Значения инпутов */
-const nickname = document.querySelector(".profile__title");
-const jobSubtitle = document.querySelector(".profile__subtitle");
-
 /* Экземпляры класса FormValidator */
 const cardFormValidate = new FormValidator(validationConfig, formAddCard);
 const profileFormValidate = new FormValidator(validationConfig, formProfile);
@@ -41,22 +37,24 @@ const popupImage = new PopupWithImage('.popup_type_view-image');
 const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo, handleClearInputsErrors);
 const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard, handleClearInputsErrors);
 
+const userInfo = new UserInfo({nameSelector: '.profile__title', infoSelector: '.profile__subtitle'});
+
 /* Получить значения инпутов */
 function getValueInputs() {
-    nameInput.value = nickname.textContent;
-    jobInput.value = jobSubtitle.textContent;
+    const information = userInfo.getUserInfo();
+    nameInput.value = information.name;
+    jobInput.value = information.info;
 }
 
 /* Сохранить информацию профиля */
 function saveInfo(event, { name, job }) {
     event.preventDefault();
 
-    nickname.textContent = name;
-    jobSubtitle.textContent = job;
+    userInfo.setUserInfo(name, job);
 }
 
 /* Добавить карточку */
-function addCard(event, {place, link}) {
+function addCard(event, { place, link }) {
     event.preventDefault();
 
     const newCardValues = {
@@ -98,7 +96,6 @@ popupProfileOpenBtn.addEventListener('click', () => {
 
 /* Слушатель открытия формы добавления карточки */
 popupAddCardOpenBtn.addEventListener('click', () => {
-
     cardFormValidate.toggleButtonState();
 
     popupFormAdd.open();
