@@ -36,8 +36,8 @@ const sectionData = {
 const cardsList = new Section(sectionData, '.elements__cards');
 
 const popupImage = new PopupWithImage('.popup_type_view-image');
-const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo, handleClearInputsErrors);
-const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard, handleClearInputsErrors);
+const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo);
+const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard);
 
 const userInfo = new UserInfo({nameSelector: '.profile__title', infoSelector: '.profile__subtitle'});
 
@@ -75,12 +75,6 @@ function rendererCard(cardItem) {
     cardsList.addItem(cardElement);
 }
 
-/* Очистить инпуты */
-function handleClearInputsErrors() {
-    cardFormValidate.clearInputsErrors();
-}
-
-
 /* Обработчик клика по картинке */
 function handleCardImageClick(link, name) {
     popupImage.open(link, name);
@@ -99,6 +93,7 @@ popupProfileOpenBtn.addEventListener('click', () => {
 /* Слушатель открытия формы добавления карточки */
 popupAddCardOpenBtn.addEventListener('click', () => {
     cardFormValidate.toggleButtonState();
+    cardFormValidate.clearInputsErrors();
 
     popupFormAdd.open();
 });
