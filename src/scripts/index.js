@@ -4,6 +4,7 @@ import Section from './components/Section.js';
 import UserInfo from './components/UserInfo.js';
 import { PopupWithImage, PopupWithForm } from './components/Popup.js';
 import { validationConfig, initialCards } from './data.js';
+import '../pages/index.css'
 
 /* Формы */
 const formProfile = document.querySelector(".form_type_profile");
