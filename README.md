@@ -12,4 +12,4 @@
 
 ## Ссылка на GitHub Pages
 
-[https://zvmarina.github.io/mesto/index.html](https://zvmarina.github.io/mesto/index.html "Место")
+[https://zvmarina.github.io/mesto/](https://zvmarina.github.io/mesto/ "Место")
