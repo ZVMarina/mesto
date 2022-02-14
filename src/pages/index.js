@@ -4,6 +4,7 @@ import Section from '../scripts/components/Section.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithForm from '../scripts/components/PopupWithForm';
 import PopupWithImage from '../scripts/components/PopupWithImage';
+import Api from '../scripts/components/Api';
 import { validationConfig, initialCards } from '../scripts/data.js';
 import '../pages/index.css'
 
@@ -99,4 +100,14 @@ popupAddCardOpenBtn.addEventListener('click', () => {
 });
 
 
-cardsList.renderCards();
+
+
+const api = new Api();
+
+Promise.all([api.getUserInfo(), api.getCards()])
+.then(res => {
+    const info = res[0];
+    const cards = res[1];
+    userInfo.setUserInfo(info.name, info.about);
+    cardsList.renderCards(cards);
+});
