@@ -53,7 +53,10 @@ function getValueInputs() {
 function saveInfo(event, { name, job }) {
     event.preventDefault();
 
-    userInfo.setUserInfo(name, job);
+    api.changeProfile(name, job)
+    .then(res => {
+        userInfo.setUserInfo(res.name, res.about);
+    });
 }
 
 /* Добавить карточку */
