@@ -40,4 +40,20 @@ export default class Api {
       .then(res => res.json())
       .then((result) => result);
   }
+
+  addCard(name, link) {
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/cards', {
+      method: 'POST',
+      headers: {
+        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })    
+    })
+      .then(res => res.json())
+      .then((result) => result);
+  }
 }
