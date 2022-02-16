@@ -40,7 +40,7 @@ const popupImage = new PopupWithImage('.popup_type_view-image');
 const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo);
 const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard);
 
-const userInfo = new UserInfo({nameSelector: '.profile__title', infoSelector: '.profile__subtitle'});
+const userInfo = new UserInfo({ nameSelector: '.profile__title', infoSelector: '.profile__subtitle' });
 
 /* Получить значения инпутов */
 function getValueInputs() {
@@ -54,21 +54,25 @@ function saveInfo(event, { name, job }) {
     event.preventDefault();
 
     api.changeProfile(name, job)
-    .then(res => {
-        userInfo.setUserInfo(res.name, res.about);
-    });
+        .then(res => {
+            userInfo.setUserInfo(res.name, res.about);
+        });
 }
 
 /* Добавить карточку */
-function addCard(event, { place, link }) {
+function addCard(event, { name, link }) {
     event.preventDefault();
 
-    const newCardValues = {
-        name: place,
-        link: link
-    };
+    api.addCard(name, link)
+        .then(res => {
+            const newCardValues = {
+                name: res.name,
+                link: res.link
+            };
 
-    rendererCard(newCardValues);
+            rendererCard(newCardValues)
+        });
+
 }
 
 /* Отрисовать карточку */
@@ -108,9 +112,9 @@ popupAddCardOpenBtn.addEventListener('click', () => {
 const api = new Api();
 
 Promise.all([api.getUserInfo(), api.getCards()])
-.then(res => {
-    const info = res[0];
-    const cards = res[1];
-    userInfo.setUserInfo(info.name, info.about);
-    cardsList.renderCards(cards);
-});
+    .then(res => {
+        const info = res[0];
+        const cards = res[1];
+        userInfo.setUserInfo(info.name, info.about);
+        cardsList.renderCards(cards);
+    });
