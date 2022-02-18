@@ -41,7 +41,7 @@ export default class Api {
       .then((result) => result);
   }
 
-  addCard(name, link) {
+  addNewCard(name, link) {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-30/cards', {
       method: 'POST',
       headers: {

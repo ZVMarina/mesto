@@ -19,6 +19,7 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._likeButton = this._element.querySelector('.card__button_type_like');
+        this._likeCounter = this._element.querySelector('.card__like-counter');
         this._cardImage = this._element.querySelector('.card__image');
         this._cardTitle = this._element.querySelector('.card__title');
         this._deleteButton = this._element.querySelector('.card__button_type_delete');

@@ -58,7 +58,7 @@
             <div class="popup__container">
                 <h2 class="popup__title">Новое место</h2>
                 <form class="form form_type_new-card" name="add-place">
-                    <input id="place-input" type="text" class="form__input form__input_value_place" name="place" placeholder="Название"
+                    <input id="place-input" type="text" class="form__input form__input_value_place" name="name" placeholder="Название"
                         minlength="2" maxlength="30" required>
                     <span class="place-input-error form__input-error"></span>
                     <input id="url-input" type="url" class="form__input form__input_value_link" name="link"
@@ -87,6 +87,7 @@
             <div class="card__container">
                 <h2 class="card__title"></h2>
                 <button class="card__button card__button_type_like" type="button" aria-label="Поставить лайк"></button>
+                <span class="card__like-counter"></span>
             </div>
             <button class="card__button card__button_type_delete" type="button" aria-label="Удалить карточку"></button>
         </li>

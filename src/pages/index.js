@@ -63,8 +63,9 @@ function saveInfo(event, { name, job }) {
 function addCard(event, { name, link }) {
     event.preventDefault();
 
-    api.addCard(name, link)
+    api.addNewCard(name, link)
         .then(res => {
+            console.log(res);
             const newCardValues = {
                 name: res.name,
                 link: res.link
