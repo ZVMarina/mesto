@@ -4,11 +4,12 @@ import Section from '../scripts/components/Section.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithForm from '../scripts/components/PopupWithForm';
 import PopupWithImage from '../scripts/components/PopupWithImage';
+import PopupWithConfirm from '../scripts/components/PopupWithConfirm';
 import Api from '../scripts/components/Api';
 import { validationConfig, initialCards } from '../scripts/data.js';
 import '../pages/index.css'
 
-/* Формы */
+/* Формы и модалки */
 const formProfile = document.querySelector(".form_type_profile");
 const formAddCard = document.querySelector(".form_type_new-card");
 
@@ -37,6 +38,7 @@ const sectionData = {
 const cardsList = new Section(sectionData, '.elements__cards');
 
 const popupImage = new PopupWithImage('.popup_type_view-image');
+const popupConfirm = new PopupWithConfirm('.popup_type_confirm');
 const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo);
 const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard);
 
@@ -78,7 +80,7 @@ function addCard(event, { name, link }) {
 
 /* Отрисовать карточку */
 function rendererCard(cardItem) {
-    const card = new Card(cardItem, '.cards-template', handleCardImageClick);
+    const card = new Card(cardItem, '.cards-template', handleCardImageClick, handleCardConfirm);
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
 }
@@ -86,6 +88,11 @@ function rendererCard(cardItem) {
 /* Обработчик клика по картинке */
 function handleCardImageClick(link, name) {
     popupImage.open(link, name);
+}
+
+/* Обработчик клика по кнопке удалить */
+function handleCardConfirm() {
+    popupConfirm.open();
 }
 
 /* Слушатель открытия формы редактирования профиля */
@@ -105,8 +112,6 @@ popupAddCardOpenBtn.addEventListener('click', () => {
 
     popupFormAdd.open();
 });
-
-
 
 
 const api = new Api();
