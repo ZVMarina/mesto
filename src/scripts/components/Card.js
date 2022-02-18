@@ -2,8 +2,11 @@ export default class Card {
     constructor(data, templateSelector, handleCardImageClick) {
         this._name = data.name;
         this._link = data.link;
+        this._likes = data.likes.length;
         this._templateSelector = templateSelector;
         this.handleCardImageClick = handleCardImageClick;
+
+        console.log(this);
     }
 
     _getTemplate() {
@@ -31,6 +34,9 @@ export default class Card {
 
         /* Title */
         this._cardTitle.textContent = this._name;
+
+        /* Like-counter */
+        this._likeCounter.textContent = this._likes;
 
         return this._element;
     }

@@ -80,7 +80,6 @@ function addCard(event, { name, link }) {
 function rendererCard(cardItem) {
     const card = new Card(cardItem, '.cards-template', handleCardImageClick);
     const cardElement = card.generateCard();
-
     cardsList.addItem(cardElement);
 }
 
