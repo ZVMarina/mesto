@@ -119,7 +119,12 @@ const api = new Api();
 Promise.all([api.getUserInfo(), api.getCards()])
     .then(res => {
         const info = res[0];
+        const myId = info._id;
         const cards = res[1];
+        cards.forEach(item => {
+            item._myId = myId;
+        });
+        console.log(cards);
         userInfo.setUserInfo(info.name, info.about);
         cardsList.renderCards(cards);
     });
