@@ -36,6 +36,7 @@ const sectionData = {
 }
 
 const cardsList = new Section(sectionData, '.elements__cards');
+const api = new Api();
 
 const popupImage = new PopupWithImage('.popup_type_view-image');
 const popupConfirm = new PopupWithConfirm('.popup_type_confirm');
@@ -80,7 +81,7 @@ function addCard(event, { name, link }) {
 
 /* Отрисовать карточку */
 function rendererCard(cardItem) {
-    const card = new Card(cardItem, '.cards-template', handleCardImageClick, handleCardConfirm);
+    const card = new Card(cardItem, '.cards-template', handleCardImageClick, api, popupConfirm);
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
 }
@@ -88,11 +89,6 @@ function rendererCard(cardItem) {
 /* Обработчик клика по картинке */
 function handleCardImageClick(link, name) {
     popupImage.open(link, name);
-}
-
-/* Обработчик клика по кнопке удалить */
-function handleCardConfirm() {
-    popupConfirm.open();
 }
 
 /* Слушатель открытия формы редактирования профиля */
@@ -113,9 +109,6 @@ popupAddCardOpenBtn.addEventListener('click', () => {
     popupFormAdd.open();
 });
 
-
-const api = new Api();
-
 Promise.all([api.getUserInfo(), api.getCards()])
     .then(res => {
         const info = res[0];
@@ -124,7 +117,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
         cards.forEach(item => {
             item._myId = myId;
         });
-        console.log(cards);
         userInfo.setUserInfo(info.name, info.about);
         cardsList.renderCards(cards);
     });

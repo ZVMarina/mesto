@@ -35,7 +35,7 @@ export default class Api {
       body: JSON.stringify({
         name: name,
         about: about
-      })    
+      })
     })
       .then(res => res.json())
       .then((result) => result);
@@ -51,7 +51,18 @@ export default class Api {
       body: JSON.stringify({
         name: name,
         link: link
-      })    
+      })
+    })
+      .then(res => res.json())
+      .then((result) => result);
+  }
+
+  deleteCard(id) {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-30/cards/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+      }
     })
       .then(res => res.json())
       .then((result) => result);

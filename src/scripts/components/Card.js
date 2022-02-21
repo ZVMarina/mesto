@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(data, templateSelector, handleCardImageClick, handleCardConfirm) {
+    constructor(data, templateSelector, handleCardImageClick, api, popupConfirm) {
         this._name = data.name;
         this._link = data.link;
         this._likes = data.likes;
@@ -7,8 +7,11 @@ export default class Card {
         this._ownerId = data.owner._id;
         this._myId = data._myId;
         this._templateSelector = templateSelector;
+        this.api = api;
         this.handleCardImageClick = handleCardImageClick;
-        this.handleCardConfirm = handleCardConfirm;
+        this.popupConfirm = popupConfirm;
+
+        this._removeCard = this._removeCard.bind(this);
     }
 
     _getTemplate() {
@@ -61,8 +64,7 @@ export default class Card {
         /* Delete card */
         if (this._deleteButton) { 
             this._deleteButton.addEventListener('click', () => {
-            this.handleCardConfirm();
-            /* this._removeCard(); */
+            this.popupConfirm.open(this._removeCard);
         })};
 
         /* Open card */
@@ -76,6 +78,9 @@ export default class Card {
     }
 
     _removeCard() {
-        this._element.remove();
+        this.api.deleteCard(this._cardId)
+        .then(() => {
+            this._element.remove();
+        })
     }
 }
