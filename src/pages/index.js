@@ -9,6 +9,8 @@ import Api from '../scripts/components/Api';
 import { validationConfig, initialCards } from '../scripts/data.js';
 import '../pages/index.css'
 
+let myId;
+
 /* Формы и модалки */
 const formProfile = document.querySelector(".form_type_profile");
 const formAddCard = document.querySelector(".form_type_new-card");
@@ -68,10 +70,9 @@ function addCard(event, { name, link }) {
 
     api.addNewCard(name, link)
         .then(res => {
-            console.log(res);
             const newCardValues = {
-                name: res.name,
-                link: res.link
+                ...res,
+                _myId: myId
             };
 
             rendererCard(newCardValues)
@@ -112,7 +113,7 @@ popupAddCardOpenBtn.addEventListener('click', () => {
 Promise.all([api.getUserInfo(), api.getCards()])
     .then(res => {
         const info = res[0];
-        const myId = info._id;
+        myId = info._id;
         const cards = res[1];
         cards.forEach(item => {
             item._myId = myId;
