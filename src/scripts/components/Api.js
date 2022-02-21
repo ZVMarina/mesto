@@ -67,4 +67,19 @@ export default class Api {
       .then(res => res.json())
       .then((result) => result);
   }
+
+  changeAvatar() {
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/users/avatar', {
+      method: 'PATCH',
+      headers: {
+        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: link,
+      })
+    })
+      .then(res => res.json())
+      .then((result) => result);
+  }
 }

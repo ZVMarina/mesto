@@ -1,0 +1,29 @@
+.profile__avatar-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.profile__avatar-container:hover::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .8);
+    cursor: pointer;
+}
+
+.profile__avatar-container:hover::after {
+    content: url('../../../images/profile/pen-for-avatar.svg');
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    cursor: pointer;
+}

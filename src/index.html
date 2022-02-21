@@ -16,7 +16,9 @@
         <main class="content">
             <section class="profile section">
                 <div class="profile__container">
-                    <img src="<%=require('./images/profile/avatar.jpg')%>" alt="Аватарка" class="profile__avatar">
+                    <div class="profile__avatar-container">
+                        <img src="<%=require('./images/profile/avatar.jpg')%>" alt="Аватарка" class="profile__avatar">
+                    </div>
                     <div class="profile__info">
                         <h1 class="profile__title"></h1>
                         <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
@@ -101,7 +103,6 @@
                     <span class="card__like-counter"></span>
                 </div>
             </div>
-            <!-- <button class="card__button card__button_type_delete" type="button" aria-label="Удалить карточку"></button> -->
         </li>
     </template>
 </body>
