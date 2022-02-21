@@ -14,10 +14,12 @@ let myId;
 /* Формы и модалки */
 const formProfile = document.querySelector(".form_type_profile");
 const formAddCard = document.querySelector(".form_type_new-card");
+const formAvatar = document.querySelector(".form_type_change-profile");
 
 /* Кнопки */
 const popupProfileOpenBtn = document.querySelector(".profile__edit-button");
 const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
+const popupChangeAvatarOpenBtn = document.querySelector(".profile__avatar-container");
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
@@ -26,9 +28,11 @@ const jobInput = document.querySelector(".form__input_value_job");
 /* Экземпляры класса FormValidator */
 const cardFormValidate = new FormValidator(validationConfig, formAddCard);
 const profileFormValidate = new FormValidator(validationConfig, formProfile);
+const avatarFormValidate = new FormValidator(validationConfig, formAvatar);
 
 cardFormValidate.enableValidation();
 profileFormValidate.enableValidation();
+avatarFormValidate.enableValidation();
 
 const sectionData = {
     items: initialCards,
@@ -44,6 +48,7 @@ const popupImage = new PopupWithImage('.popup_type_view-image');
 const popupConfirm = new PopupWithConfirm('.popup_type_confirm');
 const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo);
 const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard);
+const popupFormAvatar = new PopupWithForm('.popup_type_change-profile', addCard);
 
 const userInfo = new UserInfo({ nameSelector: '.profile__title', infoSelector: '.profile__subtitle' });
 
@@ -108,6 +113,16 @@ popupAddCardOpenBtn.addEventListener('click', () => {
     cardFormValidate.clearInputsErrors();
 
     popupFormAdd.open();
+});
+
+/* Слушатель открытия формы изменения аватара */
+popupChangeAvatarOpenBtn.addEventListener('click', () => {
+    getValueInputs();
+
+    avatarFormValidate.clearInputsErrors();
+    avatarFormValidate.toggleButtonState();
+
+    popupFormAvatar.open();
 });
 
 Promise.all([api.getUserInfo(), api.getCards()])
