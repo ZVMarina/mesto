@@ -82,4 +82,26 @@ export default class Api {
       .then(res => res.json())
       .then((result) => result);
   }
+
+  putLike(id) {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-30/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+      }
+    })
+      .then(res => res.json())
+      .then((result) => result);
+  }
+
+  deleteLike(id) {
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-30/cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+      }
+    })
+      .then(res => res.json())
+      .then((result) => result);
+  }
 }
