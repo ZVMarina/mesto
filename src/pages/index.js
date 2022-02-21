@@ -48,9 +48,9 @@ const popupImage = new PopupWithImage('.popup_type_view-image');
 const popupConfirm = new PopupWithConfirm('.popup_type_confirm');
 const popupFormEdit = new PopupWithForm('.popup_type_edit-info', saveInfo);
 const popupFormAdd = new PopupWithForm('.popup_type_add-card', addCard);
-const popupFormAvatar = new PopupWithForm('.popup_type_change-profile', addCard);
+const popupFormAvatar = new PopupWithForm('.popup_type_change-profile', saveAvatar);
 
-const userInfo = new UserInfo({ nameSelector: '.profile__title', infoSelector: '.profile__subtitle' });
+const userInfo = new UserInfo({ nameSelector: '.profile__title', infoSelector: '.profile__subtitle', avatarSelector: '.profile__avatar' });
 
 /* Получить значения инпутов */
 function getValueInputs() {
@@ -83,6 +83,16 @@ function addCard(event, { name, link }) {
             rendererCard(newCardValues)
         });
 
+}
+
+/* Сохранить аватар */
+function saveAvatar(event, { link }) {
+    event.preventDefault();
+
+    api.changeAvatar(link)
+        .then(res => {
+            userInfo.setAvatar(res.avatar);
+        });
 }
 
 /* Отрисовать карточку */
@@ -127,6 +137,7 @@ popupChangeAvatarOpenBtn.addEventListener('click', () => {
 
 Promise.all([api.getUserInfo(), api.getCards()])
     .then(res => {
+        console.log(res);
         const info = res[0];
         myId = info._id;
         const cards = res[1];
@@ -134,5 +145,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
             item._myId = myId;
         });
         userInfo.setUserInfo(info.name, info.about);
+        userInfo.setAvatar(info.avatar)
         cardsList.renderCards(cards);
     });

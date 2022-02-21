@@ -68,8 +68,8 @@ export default class Api {
       .then((result) => result);
   }
 
-  changeAvatar() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/users/avatar', {
+  changeAvatar(link) {
+    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/users/me/avatar', {
       method: 'PATCH',
       headers: {
         authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
