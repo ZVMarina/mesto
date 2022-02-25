@@ -1,5 +1,6 @@
 export default class Card {
     constructor(data, templateSelector, handleCardImageClick, api, popupConfirm) {
+        this.data = data;
         this._name = data.name;
         this._link = data.link;
         this._likes = data.likes;
@@ -50,6 +51,10 @@ export default class Card {
             this._deleteButton = this._element.querySelector('.card__button_type_delete');
         }
 
+        if (this._likes.some(item => item._id === this._myId)) {
+            this._likeButton.classList.add('card__button_active')
+        }
+
         this._setEventListeners();
 
         return this._element;
@@ -59,6 +64,21 @@ export default class Card {
         /* Like */
         this._likeButton.addEventListener('click', () => {
             this._toggleActiveLike();
+
+            if (this._likes.every(item => item._id !== this._myId)) {
+                this.api.putLike(this._cardId)
+                .then(card => {
+                    this._likes = card.likes;
+                    this._likeCounter.textContent = this._likes.length;
+                })
+            } else {
+                this.api.deleteLike(this._cardId)
+                .then(card => {
+                    this._likes = card.likes;
+                    this._likeCounter.textContent = this._likes.length;
+                })
+            }
+
         });
 
         /* Delete card */

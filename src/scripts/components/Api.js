@@ -1,13 +1,14 @@
 export default class Api {
-  constructor() {
-
+  constructor({ baseUrl, authorizationKey }) {
+    this.baseUrl = baseUrl;
+    this.authorizationKey = authorizationKey;
   }
 
   getUserInfo() {
-    return fetch('https://nomoreparties.co/v1/cohort-30/users/me', {
+    return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20'
+        authorization: this.authorizationKey
       }
     })
       .then(res => res.json())
@@ -15,10 +16,10 @@ export default class Api {
   }
 
   getCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/cards', {
+    return fetch(`${this.baseUrl}/cards`, {
       method: 'GET',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20'
+        authorization: this.authorizationKey
       }
     })
       .then(res => res.json())
@@ -26,10 +27,10 @@ export default class Api {
   }
 
   changeProfile(name, about) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/users/me', {
+    return fetch(`${this.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        authorization: this.authorizationKey,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -42,10 +43,10 @@ export default class Api {
   }
 
   addNewCard(name, link) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/cards', {
+    return fetch(`${this.baseUrl}/cards`, {
       method: 'POST',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        authorization: this.authorizationKey,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -58,10 +59,10 @@ export default class Api {
   }
 
   deleteCard(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-30/cards/${id}`, {
+    return fetch(`${this.baseUrl}/cards/${id}`, {
       method: 'DELETE',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        authorization: this.authorizationKey,
       }
     })
       .then(res => res.json())
@@ -69,10 +70,10 @@ export default class Api {
   }
 
   changeAvatar(link) {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-30/users/me/avatar', {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        authorization: this.authorizationKey,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -84,10 +85,10 @@ export default class Api {
   }
 
   putLike(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-30/cards/${id}/likes`, {
+    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        authorization: this.authorizationKey,
       }
     })
       .then(res => res.json())
@@ -95,10 +96,10 @@ export default class Api {
   }
 
   deleteLike(id) {
-    return fetch(`https://mesto.nomoreparties.co/v1/cohort-30/cards/${id}/likes`, {
+    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: {
-        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        authorization: this.authorizationKey,
       }
     })
       .then(res => res.json())

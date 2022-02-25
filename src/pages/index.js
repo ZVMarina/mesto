@@ -42,7 +42,13 @@ const sectionData = {
 }
 
 const cardsList = new Section(sectionData, '.elements__cards');
-const api = new Api();
+
+const apiConfig = {
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-30',
+    authorizationKey: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+}
+
+const api = new Api(apiConfig);
 
 const popupImage = new PopupWithImage('.popup_type_view-image');
 const popupConfirm = new PopupWithConfirm('.popup_type_confirm');
@@ -137,7 +143,6 @@ popupChangeAvatarOpenBtn.addEventListener('click', () => {
 
 Promise.all([api.getUserInfo(), api.getCards()])
     .then(res => {
-        console.log(res);
         const info = res[0];
         myId = info._id;
         const cards = res[1];
