@@ -27,7 +27,6 @@ export default class PopupWithForm extends Popup {
     _onSubmit(evt) {
         const values = this._getInputValues();
         this._submit(evt, values);
-        this.close();
     }
 
     /* Добавляет слушатель клика иконке закрытия попапа и оверлею; добавляет обработчик сабмита формы */

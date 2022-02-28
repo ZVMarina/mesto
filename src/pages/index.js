@@ -76,8 +76,10 @@ function saveInfo(event, { name, job }) {
     api.changeProfile(name, job)
         .then(res => {
             userInfo.setUserInfo(res.name, res.about);
+        })
+        .finally(res => {
             profileMainBtn.textContent = 'Сохранить';
-        });
+        })
 }
 
 /* Добавить карточку */
@@ -105,8 +107,10 @@ function saveAvatar(event, { link }) {
     api.changeAvatar(link)
         .then(res => {
             userInfo.setAvatar(res.avatar);
+        })
+        .finally(res => {
             avatarMainBtn.textContent = 'Сохранить';
-        });
+        })
 }
 
 /* Отрисовать карточку */
