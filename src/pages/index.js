@@ -20,6 +20,8 @@ const formAvatar = document.querySelector(".form_type_change-profile");
 const popupProfileOpenBtn = document.querySelector(".profile__edit-button");
 const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
 const popupChangeAvatarOpenBtn = document.querySelector(".profile__avatar-container");
+const profileMainBtn = document.querySelector(".form__main-button_place_profile");
+const avatarMainBtn = document.querySelector(".form__main-button_place_change-profile");
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
@@ -69,9 +71,12 @@ function getValueInputs() {
 function saveInfo(event, { name, job }) {
     event.preventDefault();
 
+    profileMainBtn.textContent = 'Сохранить...';
+
     api.changeProfile(name, job)
         .then(res => {
             userInfo.setUserInfo(res.name, res.about);
+            profileMainBtn.textContent = 'Сохранить';
         });
 }
 
@@ -95,9 +100,12 @@ function addCard(event, { name, link }) {
 function saveAvatar(event, { link }) {
     event.preventDefault();
 
+    avatarMainBtn.textContent = 'Сохранить...';
+
     api.changeAvatar(link)
         .then(res => {
             userInfo.setAvatar(res.avatar);
+            avatarMainBtn.textContent = 'Сохранить';
         });
 }
 
