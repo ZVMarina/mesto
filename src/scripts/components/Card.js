@@ -63,19 +63,20 @@ export default class Card {
     _setEventListeners() {
         /* Like */
         this._likeButton.addEventListener('click', () => {
-            this._toggleActiveLike();
 
             if (this._likes.every(item => item._id !== this._myId)) {
                 this.api.putLike(this._cardId)
                 .then(card => {
                     this._likes = card.likes;
                     this._likeCounter.textContent = this._likes.length;
+                    this._toggleActiveLike();
                 })
             } else {
                 this.api.deleteLike(this._cardId)
                 .then(card => {
                     this._likes = card.likes;
                     this._likeCounter.textContent = this._likes.length;
+                    this._toggleActiveLike();
                 })
             }
 

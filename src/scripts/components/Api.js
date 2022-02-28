@@ -3,6 +3,14 @@ export default class Api {
     this.baseUrl = baseUrl;
     this.authorizationKey = authorizationKey;
   }
+  
+  _getResponseData(res) {
+    if (!res.ok) {
+      return Promise.reject(`Ошибка ${res.status}`);
+    }
+
+    return res.json();
+  }
 
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
@@ -11,8 +19,7 @@ export default class Api {
         authorization: this.authorizationKey
       }
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 
   getCards() {
@@ -22,8 +29,7 @@ export default class Api {
         authorization: this.authorizationKey
       }
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 
   changeProfile(name, about) {
@@ -38,8 +44,7 @@ export default class Api {
         about: about
       })
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 
   addNewCard(name, link) {
@@ -54,8 +59,7 @@ export default class Api {
         link: link
       })
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 
   deleteCard(id) {
@@ -65,8 +69,7 @@ export default class Api {
         authorization: this.authorizationKey,
       }
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 
   changeAvatar(link) {
@@ -80,8 +83,7 @@ export default class Api {
         avatar: link,
       })
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 
   putLike(id) {
@@ -91,8 +93,7 @@ export default class Api {
         authorization: this.authorizationKey,
       }
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 
   deleteLike(id) {
@@ -102,7 +103,6 @@ export default class Api {
         authorization: this.authorizationKey,
       }
     })
-      .then(res => res.json())
-      .then((result) => result);
+      .then(res => this._getResponseData(res))
   }
 }

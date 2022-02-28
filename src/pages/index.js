@@ -164,4 +164,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
         userInfo.setUserInfo(info.name, info.about);
         userInfo.setAvatar(info.avatar)
         cardsList.renderCards(cards);
-    });
+    })
+    .catch(error => {
+        console.log(error);
+    })
