@@ -1,12 +1,12 @@
 export default class Card {
-    constructor(data, templateSelector, handleCardImageClick, api, popupConfirm) {
+    constructor(data, myId, templateSelector, handleCardImageClick, api, popupConfirm) {
         this.data = data;
         this._name = data.name;
         this._link = data.link;
         this._likes = data.likes;
         this._cardId = data._id;
         this._ownerId = data.owner._id;
-        this._myId = data._myId;
+        this._myId = myId;
         this._templateSelector = templateSelector;
         this.api = api;
         this.handleCardImageClick = handleCardImageClick;

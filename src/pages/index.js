@@ -123,7 +123,7 @@ function saveAvatar(event, { link }) {
 
 /* Создать карточку */
 function createCard(item) {
-    return new Card(item, '.cards-template', handleCardImageClick, api, popupConfirm).generateCard();
+    return new Card(item, myId, '.cards-template', handleCardImageClick, api, popupConfirm).generateCard();
 }
 
 /* Отрисовать карточку */
@@ -164,16 +164,12 @@ popupChangeAvatarOpenBtn.addEventListener('click', () => {
 });
 
 Promise.all([api.getUserInfo(), api.getCards()])
-    .then(res => {
-        const info = res[0];
+    .then(([info, cards]) => {
         myId = info._id;
-        const cards = res[1].reverse();
-        cards.forEach(item => {
-            item._myId = myId;
-        });
+        
         userInfo.setUserInfo(info.name, info.about);
         userInfo.setAvatar(info.avatar)
-        cardsList.renderCards(cards);
+        cardsList.renderCards(cards.reverse());
     })
     .catch(error => {
         console.log(error);
