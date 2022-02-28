@@ -22,6 +22,7 @@ const popupAddCardOpenBtn = document.querySelector(".profile__add-button");
 const popupChangeAvatarOpenBtn = document.querySelector(".profile__avatar-container");
 const profileMainBtn = document.querySelector(".form__main-button_place_profile");
 const avatarMainBtn = document.querySelector(".form__main-button_place_change-profile");
+const cardMainBtn = document.querySelector(".form__main-button_place_new-card");
 
 /* Инпуты */
 const nameInput = document.querySelector(".form__input_value_name");
@@ -86,7 +87,10 @@ function saveInfo(event, { name, job }) {
 function addCard(event, { name, link }) {
     event.preventDefault();
 
-    api.addNewCard(name, link)
+    cardMainBtn.textContent = 'Создание...';
+    cardMainBtn.setAttribute('disabled', 'true');
+
+    return api.addNewCard(name, link)
         .then(res => {
             const newCardValues = {
                 ...res,
@@ -94,7 +98,11 @@ function addCard(event, { name, link }) {
             };
 
             rendererCard(newCardValues)
-        });
+        })
+        .finally(res => {
+            cardMainBtn.textContent = 'Сохранить';
+            cardMainBtn.removeAttribute('disabled');
+        })
 
 }
 
@@ -113,10 +121,14 @@ function saveAvatar(event, { link }) {
         })
 }
 
+/* Создать карточку */
+function createCard(item) {
+    return new Card(item, '.cards-template', handleCardImageClick, api, popupConfirm).generateCard();
+}
+
 /* Отрисовать карточку */
 function rendererCard(cardItem) {
-    const card = new Card(cardItem, '.cards-template', handleCardImageClick, api, popupConfirm);
-    const cardElement = card.generateCard();
+    const cardElement = createCard(cardItem);
     cardsList.addItem(cardElement);
 }
 
@@ -145,8 +157,6 @@ popupAddCardOpenBtn.addEventListener('click', () => {
 
 /* Слушатель открытия формы изменения аватара */
 popupChangeAvatarOpenBtn.addEventListener('click', () => {
-    getValueInputs();
-
     avatarFormValidate.clearInputsErrors();
     avatarFormValidate.toggleButtonState();
 
@@ -157,7 +167,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
     .then(res => {
         const info = res[0];
         myId = info._id;
-        const cards = res[1];
+        const cards = res[1].reverse();
         cards.forEach(item => {
             item._myId = myId;
         });
