@@ -73,7 +73,7 @@ function saveInfo(event, { name, job }) {
 
     profileMainBtn.textContent = 'Сохранить...';
 
-    api.changeProfile(name, job)
+    return api.changeProfile(name, job)
         .then(res => {
             userInfo.setUserInfo(res.name, res.about);
         })
