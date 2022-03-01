@@ -48,7 +48,10 @@ const cardsList = new Section(sectionData, '.elements__cards');
 
 const apiConfig = {
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-30',
-    authorizationKey: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+    headers: {
+        authorization: '5bae0af6-58f0-4b05-8e26-60f5e85b4d20',
+        'Content-Type': 'application/json'
+      }
 }
 
 const api = new Api(apiConfig);
