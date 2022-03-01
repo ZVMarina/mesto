@@ -1,6 +1,7 @@
 export default class Popup {
     constructor(popupSelector) {
         this.popup = document.querySelector(popupSelector);
+        this.closeButton = this.popup.querySelector('.popup__close-button');
 
         this._handleEscClose = this._handleEscClose.bind(this);
         this._handleOverlay = this._handleOverlay.bind(this);
@@ -35,9 +36,7 @@ export default class Popup {
 
     /* Закрытие по крестику */
     _handleCloseButton(evt) {
-        const closeButton = this.popup.querySelector('.popup__close-button');
-
-        if (evt.target === closeButton) {
+        if (evt.target === this.closeButton) {
             this.close();
         }
     }
@@ -45,13 +44,13 @@ export default class Popup {
     /* Добавляет слушатель клика иконке закрытия попапа и оверлею */
     setEvents() {
         document.addEventListener('keydown', this._handleEscClose);
-        this.popup.addEventListener('click', this._handleOverlay);
+        this.popup.addEventListener('mousedown', this._handleOverlay);
         this.popup.addEventListener('click', this._handleCloseButton);
     }
 
     removeEvents() {
         document.removeEventListener('keydown', this._handleEscClose);
-        this.popup.removeEventListener('click', this._handleOverlay);
+        this.popup.removeEventListener('mousedown', this._handleOverlay);
         this.popup.removeEventListener('click', this._handleCloseButton);
     }
 }
