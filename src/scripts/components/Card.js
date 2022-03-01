@@ -28,6 +28,7 @@ export default class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._likeButton = this._element.querySelector('.card__button_type_like');
+        this._deleteButton = this._element.querySelector('.card__button_type_delete');
         this._likeCounter = this._element.querySelector('.card__like-counter');
         this._cardImage = this._element.querySelector('.card__image');
         this._cardTitle = this._element.querySelector('.card__title');
@@ -42,13 +43,8 @@ export default class Card {
         /* Like-counter */
         this._likeCounter.textContent = this._likes.length;
         
-        if (this._ownerId === this._myId) {
-            const deleteButton = document.createElement('button');
-            deleteButton.setAttribute('class', 'card__button card__button_type_delete');
-            deleteButton.setAttribute('type', 'button');
-            deleteButton.setAttribute('aria-label', 'Удалить карточку');
-            this._element.append(deleteButton);
-            this._deleteButton = this._element.querySelector('.card__button_type_delete');
+        if (this._ownerId !== this._myId) {
+            this._deleteButton.remove()
         }
 
         if (this._likes.some(item => item._id === this._myId)) {
