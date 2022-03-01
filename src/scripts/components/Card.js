@@ -67,6 +67,9 @@ export default class Card {
                     this._likeCounter.textContent = this._likes.length;
                     this._toggleActiveLike();
                 })
+                .catch((err) => {
+                    console.log(err);
+                });
             } else {
                 this.api.deleteLike(this._cardId)
                 .then(card => {
@@ -74,6 +77,9 @@ export default class Card {
                     this._likeCounter.textContent = this._likes.length;
                     this._toggleActiveLike();
                 })
+                .catch((err) => {
+                    console.log(err);
+                });
             }
 
         });
@@ -99,5 +105,8 @@ export default class Card {
         .then(() => {
             this._element.remove();
         })
+        .catch((err) => {
+            console.log(err);
+        });
     }
 }

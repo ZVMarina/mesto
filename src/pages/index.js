@@ -140,6 +140,7 @@ function handleCardImageClick(link, name) {
     popupImage.open(link, name);
 }
 
+
 /* Слушатель открытия формы редактирования профиля */
 popupProfileOpenBtn.addEventListener('click', () => {
     getValueInputs();
