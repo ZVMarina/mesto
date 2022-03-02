@@ -11,6 +11,7 @@ export default class Card {
         this.api = api;
         this.handleCardImageClick = handleCardImageClick;
         this.popupConfirm = popupConfirm;
+        this.buttonConfirm = this.popupConfirm._submitButton;
 
         this._removeCard = this._removeCard.bind(this);
     }
@@ -101,9 +102,14 @@ export default class Card {
     }
 
     _removeCard() {
+        this.buttonConfirm.textContent = 'Подождите...';
+
         return this.api.deleteCard(this._cardId)
         .then(() => {
             this._element.remove();
+        })
+        .finally(() => {
+            this.buttonConfirm.textContent = 'Да';
         })
         .catch((err) => {
             console.log(err);
