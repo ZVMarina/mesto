@@ -75,14 +75,14 @@ function getValueInputs() {
 function saveInfo(event, { name, job }) {
     event.preventDefault();
 
-    profileMainBtn.textContent = 'Сохранить...';
+    renderLoading(true, profileMainBtn);
 
     return api.changeProfile(name, job)
         .then(res => {
             userInfo.setUserInfo(res.name, res.about);
         })
         .finally(res => {
-            profileMainBtn.textContent = 'Сохранить';
+            renderLoading(false, profileMainBtn);
         })
         .catch(error => {
             console.log(error);
@@ -93,7 +93,7 @@ function saveInfo(event, { name, job }) {
 function addCard(event, { name, link }) {
     event.preventDefault();
 
-    cardMainBtn.textContent = 'Создание...';
+    renderLoading(true, cardMainBtn)
     cardMainBtn.setAttribute('disabled', 'true');
 
     return api.addNewCard(name, link)
@@ -106,7 +106,7 @@ function addCard(event, { name, link }) {
             rendererCard(newCardValues)
         })
         .finally(res => {
-            cardMainBtn.textContent = 'Сохранить';
+            cardMainBtn.textContent = 'Создать';
             cardMainBtn.removeAttribute('disabled');
         })
         .catch(error => {
@@ -119,14 +119,14 @@ function addCard(event, { name, link }) {
 function saveAvatar(event, { link }) {
     event.preventDefault();
 
-    avatarMainBtn.textContent = 'Сохранить...';
+    renderLoading(true, avatarMainBtn)
 
     return api.changeAvatar(link)
         .then(res => {
             userInfo.setAvatar(res.avatar);
         })
         .finally(res => {
-            avatarMainBtn.textContent = 'Сохранить';
+            renderLoading(false, avatarMainBtn)
         })
         .catch(error => {
             console.log(error);
@@ -147,6 +147,15 @@ function rendererCard(cardItem) {
 /* Обработчик клика по картинке */
 function handleCardImageClick(link, name) {
     popupImage.open(link, name);
+}
+
+/* Изменить текст кнопки */
+function renderLoading(isLoading, buttonElement, buttonText='Сохранить') {
+    if (isLoading) {
+        buttonElement.textContent = 'Подождите...'
+    } else {
+        buttonElement.textContent = buttonText
+    }
 }
 
 
