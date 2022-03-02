@@ -84,6 +84,9 @@ function saveInfo(event, { name, job }) {
         .finally(res => {
             profileMainBtn.textContent = 'Сохранить';
         })
+        .catch(error => {
+            console.log(error);
+        })
 }
 
 /* Добавить карточку */
@@ -106,6 +109,9 @@ function addCard(event, { name, link }) {
             cardMainBtn.textContent = 'Сохранить';
             cardMainBtn.removeAttribute('disabled');
         })
+        .catch(error => {
+            console.log(error);
+        })
 
 }
 
@@ -115,12 +121,15 @@ function saveAvatar(event, { link }) {
 
     avatarMainBtn.textContent = 'Сохранить...';
 
-    api.changeAvatar(link)
+    return api.changeAvatar(link)
         .then(res => {
             userInfo.setAvatar(res.avatar);
         })
         .finally(res => {
             avatarMainBtn.textContent = 'Сохранить';
+        })
+        .catch(error => {
+            console.log(error);
         })
 }
 
